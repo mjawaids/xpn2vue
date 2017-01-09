@@ -1,38 +1,36 @@
 Vue.component('xpn-grid', {
     template: `
-    <table>
-        <tr>
-            <xpn-element v-for="el in elements">{{ el.name }}</xpn-element>
-        </tr>
-        <tr>
-        </tr>
-        <tr>
-        </tr>
-        <tr>
+    <table class="table">
+        <tr v-for="row in gridData">
+            <td v-for="el in row">
+                {{ el }}
+            </td>
         </tr>
     </table>
     `,
 
-    data() {
-        return {
-            elements: [
-                {name: "top left"},
-                {name: "top right"},
-                {name: "bottom left"},
-                {name: "bottom right"} 
-            ]
-        };
+    props: { gridData:Array },
+
+    methods: {
     }
 });
 
 Vue.component('xpn-element', {
     template: `
-        <td>
+        <span>
             <slot></slot>
-        </td>
+        </span>
     `
 });
 
+Vue.use(VueMaterial);
 new Vue({
-    el: '#root'
+    el: '#root',
+    data: {
+        tabledata: [
+            ['11', '12', '13'],
+            ['21', '22', '23'],
+            ['31', '32', '33']
+        ]
+    }
 });
