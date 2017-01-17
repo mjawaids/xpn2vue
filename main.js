@@ -5,7 +5,14 @@ Vue.component('xpn-grid', {
     <table class="table">
         <tr v-for="row in gridData">
             <td v-for="el in row">
-                <xpn-element @addRow="addRow" @deleteRow="deleteRow" :el="el" :id="el.id">{{ el.type }} - {{ el.id }}</xpn-element>
+                <xpn-element 
+                    @addRow="addRow" 
+                    @deleteRow="deleteRow" 
+                    @addCol="addCol" 
+                    @deleteCol="deleteCol" 
+                    :el="el">
+                        {{ el.type }} - {{ el.id }}
+                </xpn-element>
             </td>
         </tr>
     </table>
@@ -22,7 +29,7 @@ Vue.component('xpn-grid', {
     },
     
     methods: {
-        addRow(atBottom=true) {
+        addRow(atBottom = true) {
 
             // TODO: add row based on updated number of columns
 
@@ -37,7 +44,7 @@ Vue.component('xpn-grid', {
         },
 
         deleteRow(obj) {
-            let foundRow = null;
+            let foundRow = false;
 
             for(let i = 0; i<this.grid.length; i++) {
                 for(let j = 0; j<this.grid[i].length; j++) {
@@ -53,19 +60,63 @@ Vue.component('xpn-grid', {
                     break;
                 }
             }
+        },
+
+        addCol(atRight = true) {
+            for(let i = 0; i<this.grid.length; i++) {
+                let index = atRight ? this.grid[i].length - 1 : 0;
+                let obType = this.grid[i][index].type;
+                let obj = {id:'o1', type: obType};
+
+                if(atRight) {
+                    this.grid[i].push(obj);
+                    continue;
+                }
+                
+                this.grid[i].unshift(obj);
+            }
+        },
+
+        deleteCol(obj) {
+            let foundCol = null;
+
+            // Find the col
+            for(let i = 0; i<this.grid.length; i++) {
+                for(let j = 0; j<this.grid[i].length; j++) {
+                    if(this.grid[i][j] == obj) {
+                        foundCol = j;
+                        break;
+                    }
+                }
+
+                if(foundCol) {
+                    break;
+                }
+            }
+
+            for(let i = 0; i<this.grid.length; i++) {
+                // TODO: check condition for min grid
+                this.grid[i].splice(foundCol, 1);
+            }
         }
     }
 });
 
 Vue.component('xpn-element', {
-    props: ['id', 'el'],
+    props: ['el'],
     template: `
     <div>
-        <div><slot></slot></div>
-        <input type='hidden' :value='id' />
-        <button @click="$emit('addRow')">Add Bottom Row</button>
-        <button @click="$emit('addRow', false)">Add Top Row</button>
-        <button @click="$emit('deleteRow', el)">X</button>
+        <div><input type='text' :placeholder="el.type"></div>
+        <div>
+            <button @click="$emit('addRow')">Add Bottom Row \/</button>
+            <button @click="$emit('addRow', false)">Add Top Row ^</button>
+            <button @click="$emit('deleteRow', el)">X</button>
+        </div>
+        <div>
+            <button @click="$emit('addCol')">Add Right Col ></button>
+            <button @click="$emit('addCol', false)">Add Left Col <</button>
+            <button @click="$emit('deleteCol', el)">x</button>
+        </div>
     </div>
     `,
 
