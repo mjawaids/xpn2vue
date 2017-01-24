@@ -80,20 +80,24 @@ Vue.component('xpn-grid', {
 
         addRow(atTop) {
             if(atTop) {
-                console.log("cloning:");
-                console.log(this.grid[0]);
                 this.grid.unshift( this.grid[0].slice(0) );
                 return;
             }
 
             let lastIndex = this.grid.length - 1;
-            console.log("cloning:");
-            console.log(this.grid[lastIndex]);
             this.grid.push( this.grid[lastIndex].slice(0) );
         },
 
         deleteRow(obj) {
             let foundRow = false;
+            let midRowIndex = 0;
+
+            //find mid row
+            for(let i = 0; i<this.grid.length; i++) {
+                if(this.grid[i][0].type == 'obj') {
+                    midRowIndex = i;
+                }
+            }
 
             for(let i = 0; i<this.grid.length; i++) {
                 for(let j = 0; j<this.grid[i].length; j++) {
@@ -104,7 +108,17 @@ Vue.component('xpn-grid', {
                 }
 
                 if(foundRow) {
-                    // TODO: check condition for min grid with top, mid, and bottom rows
+                    // check for min grid with top, mid, and bottom rows
+                    if(i < midRowIndex && midRowIndex == 1) {
+                        // cannot delete service row. min 1 required
+                        break;
+                    }
+
+                    if(i > midRowIndex && midRowIndex == this.grid.length-2) {
+                        // cannot delete action row. min 1 required
+                        break;
+                    }
+
                     this.grid.splice(i, 1);
                     break;
                 }
@@ -127,6 +141,21 @@ Vue.component('xpn-grid', {
 
         deleteCol(obj) {
             let foundCol = null;
+            let midRowIndex, midColIndex = 0;
+
+            //find mid row
+            for(let i = 0; i<this.grid.length; i++) {
+                if(this.grid[i][0].type == 'obj') {
+                    midRowIndex = i;
+                }
+            }
+
+            //find mid col
+            for(let i = 0; i<this.grid[midRowIndex].length; i++) {
+                if(this.grid[midRowIndex][i].type != 'obj' && this.grid[midRowIndex][i].type != 'subject') {
+                    midColIndex = i;
+                }
+            }
 
             // Find the col
             for(let i = 0; i<this.grid.length; i++) {
@@ -137,13 +166,23 @@ Vue.component('xpn-grid', {
                     }
                 }
 
+                // if found break and delete the col
                 if(foundCol) {
                     break;
                 }
             }
 
+            // check condition for min grid
+            if(foundCol < midColIndex && midColIndex == 1) {
+                return;
+            }
+
+            if(foundCol > midColIndex && midColIndex == this.grid[0].length-2) {
+                return;
+            }
+            
+            // delete the col
             for(let i = 0; i<this.grid.length; i++) {
-                // TODO: check condition for min grid
                 this.grid[i].splice(foundCol, 1);
             }
         }

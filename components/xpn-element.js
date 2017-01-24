@@ -75,10 +75,10 @@ var Obj = {
                 </md-input-container>        
             </md-layout>
             <md-layout md-flex="30">
-                <md-layout>
+                <md-layout md-flex="100">
                     <md-button @click="fireAddCol" class="md-icon-button vertical-text"><md-icon class="md-primary">done</md-icon></md-button>
                 </md-layout>
-                <md-layout>
+                <md-layout md-flex="100">
                     <md-button @click="fireDeleteCol" class="md-icon-button vertical-text"><md-icon class="md-accent">clear</md-icon></md-button>
                 </md-layout>
             </md-layout>
@@ -137,10 +137,10 @@ var Subject = {
                 </md-input-container>        
             </md-layout>
             <md-layout md-flex="30">
-                <md-layout>
+                <md-layout md-flex="100">
                     <md-button @click="fireAddCol" class="md-icon-button vertical-text"><md-icon class="md-primary">done</md-icon></md-button>
                 </md-layout>
-                <md-layout>
+                <md-layout md-flex="100">
                     <md-button @click="fireDeleteCol" class="md-icon-button vertical-text"><md-icon class="md-accent">clear</md-icon></md-button>
                 </md-layout>
             </md-layout>
