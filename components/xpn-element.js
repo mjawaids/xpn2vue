@@ -27,10 +27,10 @@ var Service = {
             </md-input-container>        
         </md-layout>
         <md-layout md-flex="15">
-            <md-button @click="fireAddRow"><md-icon class="md-primary">done</md-icon></md-button>
+            <md-button @click="fireAddRow" class="md-icon-button"><md-icon class="md-primary">done</md-icon></md-button>
         </md-layout>
         <md-layout md-flex="15">
-            <md-button @click="fireDeleteRow"><md-icon class="md-accent">clear</md-icon></md-button>
+            <md-button @click="fireDeleteRow" class="md-icon-button"><md-icon class="md-accent">clear</md-icon></md-button>
         </md-layout>
     </md-layout>
     `,
@@ -68,17 +68,19 @@ var Obj = {
     props: ['el'],
     
     template: `
-        <md-layout>
+        <md-layout md-gutter>
             <md-layout md-flex="70">
-                <md-input-container>
+                <md-input-container class="vertical-text">
                     <md-input :placeholder="el.label"></md-input>
                 </md-input-container>        
             </md-layout>
-            <md-layout md-flex="15">
-                <md-button @click="fireAddCol"><md-icon class="md-primary">done</md-icon></md-button>
-            </md-layout>
-            <md-layout md-flex="15">
-                <md-button @click="fireDeleteCol"><md-icon class="md-accent">clear</md-icon></md-button>
+            <md-layout md-flex="30">
+                <md-layout>
+                    <md-button @click="fireAddCol" class="md-icon-button vertical-text"><md-icon class="md-primary">done</md-icon></md-button>
+                </md-layout>
+                <md-layout>
+                    <md-button @click="fireDeleteCol" class="md-icon-button vertical-text"><md-icon class="md-accent">clear</md-icon></md-button>
+                </md-layout>
             </md-layout>
         </md-layout>
 `,
@@ -105,10 +107,10 @@ var Rule = {
                 </md-input-container>        
             </md-layout>
             <md-layout md-flex="15">
-                <md-button @click="fireAddRule"><md-icon class="md-primary">done</md-icon></md-button>
+                <md-button @click="fireAddRule" class="md-icon-button"><md-icon class="md-primary">done</md-icon></md-button>
             </md-layout>
             <md-layout md-flex="15">
-                <md-button @click="fireDeleteRule"><md-icon class="md-accent">clear</md-icon></md-button>
+                <md-button @click="fireDeleteRule" class="md-icon-button"><md-icon class="md-accent">clear</md-icon></md-button>
             </md-layout>
         </md-layout>
     `,
@@ -130,15 +132,17 @@ var Subject = {
     template: `
         <md-layout>
             <md-layout md-flex="70">
-                <md-input-container>
+                <md-input-container class="vertical-text">
                     <md-input :placeholder="el.label"></md-input>
                 </md-input-container>        
             </md-layout>
-            <md-layout md-flex="15">
-                <md-button @click="fireAddCol"><md-icon class="md-primary">done</md-icon></md-button>
-            </md-layout>
-            <md-layout md-flex="15">
-                <md-button @click="fireDeleteCol"><md-icon class="md-accent">clear</md-icon></md-button>
+            <md-layout md-flex="30">
+                <md-layout>
+                    <md-button @click="fireAddCol" class="md-icon-button vertical-text"><md-icon class="md-primary">done</md-icon></md-button>
+                </md-layout>
+                <md-layout>
+                    <md-button @click="fireDeleteCol" class="md-icon-button vertical-text"><md-icon class="md-accent">clear</md-icon></md-button>
+                </md-layout>
             </md-layout>
         </md-layout>
     `,
@@ -184,10 +188,10 @@ var Action = {
             </md-input-container>        
         </md-layout>
         <md-layout md-flex="15">
-            <md-button @click="fireAddRow"><md-icon class="md-primary">done</md-icon></md-button>
+            <md-button @click="fireAddRow" class="md-icon-button"><md-icon class="md-primary">done</md-icon></md-button>
         </md-layout>
         <md-layout md-flex="15">
-            <md-button @click="fireDeleteRow"><md-icon class="md-accent">clear</md-icon></md-button>
+            <md-button @click="fireDeleteRow" class="md-icon-button"><md-icon class="md-accent">clear</md-icon></md-button>
         </md-layout>
     </md-layout>
     `,
