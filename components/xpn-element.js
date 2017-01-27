@@ -23,7 +23,7 @@ var Service = {
     <md-layout>
         <md-layout md-flex="70">
             <md-input-container>
-                <md-input :placeholder="el.label"></md-input>
+                <md-input :placeholder="el.label" v-model="el.value"></md-input>
             </md-input-container>        
         </md-layout>
         <md-layout md-flex="15">
@@ -71,7 +71,7 @@ var Obj = {
         <md-layout md-gutter>
             <md-layout md-flex="70">
                 <md-input-container class="vertical-text">
-                    <md-input :placeholder="el.label"></md-input>
+                    <md-input :placeholder="el.label" v-model="el.value"></md-input>
                 </md-input-container>        
             </md-layout>
             <md-layout md-flex="30">
@@ -83,7 +83,7 @@ var Obj = {
                 </md-layout>
             </md-layout>
         </md-layout>
-`,
+    `,
 
     methods: {
         fireAddCol() {
@@ -103,7 +103,7 @@ var Rule = {
         <md-layout>
             <md-layout md-flex="70">
                 <md-input-container>
-                    <md-input :placeholder="el.label"></md-input>
+                    <md-input :placeholder="el.label" v-model="el.value"></md-input>
                 </md-input-container>        
             </md-layout>
             <md-layout md-flex="15">
@@ -117,13 +117,29 @@ var Rule = {
 
     methods: {
         fireAddRule() {
-
+            bus.$emit('addRule');
         },
 
         fireDeleteRule() {
-
+            bus.$emit('deleteRule', this.el);
         }
     }
+};
+
+var Rules = {
+    props: ['el'],
+
+    components: {
+        rule: Rule
+    },
+
+    template: `
+        <md-layout md-flex="0">
+            <md-layout md-flex="100" v-for="rule in el.value">
+                <rule :el="rule"></rule>
+            </md-layout>
+        </md-layout>
+    `
 };
 
 var Subject = {
@@ -133,7 +149,7 @@ var Subject = {
         <md-layout>
             <md-layout md-flex="70">
                 <md-input-container class="vertical-text">
-                    <md-input :placeholder="el.label"></md-input>
+                    <md-input :placeholder="el.label" v-model="el.value"></md-input>
                 </md-input-container>        
             </md-layout>
             <md-layout md-flex="30">
@@ -184,7 +200,7 @@ var Action = {
     <md-layout>
         <md-layout md-flex="70">
             <md-input-container>
-                <md-input :placeholder="el.label"></md-input>
+                <md-input :placeholder="el.label" v-model="el.value"></md-input>
             </md-input-container>        
         </md-layout>
         <md-layout md-flex="15">
@@ -233,7 +249,7 @@ Vue.component('xpn-element', {
         service: Service,
         task: Task,
         obj: Obj,
-        rule: Rule,
+        rules: Rules,
         subject: Subject,
         message: Message,
         action: Action,
