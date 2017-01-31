@@ -24,7 +24,10 @@ Vue.component('xpn-grid', {
     },
 
     created() {
-        this.grid = this.gridData;
+        let clear = this.clear;
+        bus.$on('clearData', function () {
+            clear();
+        });
 
         let addrow = this.addRow;
         bus.$on('addRow', function (param) {
@@ -56,13 +59,16 @@ Vue.component('xpn-grid', {
             delrule(param);
         });
 
-        if(this.grid.length == 0) {
-            this.init();
-        }
+        this.init();
     },
     
     methods: {
         init() {
+            this.grid = this.gridData;
+            if(this.grid.length != 0) {
+                return;
+            }
+
             this.grid.push(
                 [
                     {type:'response', value:'?'}, 
@@ -88,6 +94,14 @@ Vue.component('xpn-grid', {
                     {type:'request', value:'?'}
                 ]
             );
+        },
+
+        clear() {
+            for(let i = 0; i < this.grid.length; i++) {
+                this.grid.splice(i, this.grid.length);
+            }
+
+            this.init();
         },
 
         findMidColofMidRow() {

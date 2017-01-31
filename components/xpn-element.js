@@ -134,7 +134,7 @@ var Rules = {
     },
 
     template: `
-        <md-layout md-flex="0">
+        <md-layout md-flex="0" style="min-width:300px;">
             <md-layout md-flex="100" v-for="rule in el.value">
                 <rule :el="rule"></rule>
             </md-layout>

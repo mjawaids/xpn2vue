@@ -18,5 +18,17 @@ new Vue({
     el: '#app',
     data: {
         tabledata: []
+    },
+
+    methods: {
+      confirmCancel(ref) {
+        this.$refs[ref].open();
+      },
+      
+      onClose(type) {
+        if(type == 'ok') {
+          bus.$emit('clearData');
+        }
+      }
     }
 });
