@@ -17,12 +17,20 @@ Vue.material.registerTheme({
 new Vue({
     el: '#app',
     data: {
-        tabledata: []
+        tabledata: [],
+        problem: 'Problem',
+        version: 'V01',
+        author: 'Author',
+        versions: ['V01', 'V02']
     },
 
     methods: {
       confirmCancel(ref) {
         this.$refs[ref].open();
+      },
+
+      saveData() {
+        bus.$emit('saveData');
       },
       
       onClose(type) {

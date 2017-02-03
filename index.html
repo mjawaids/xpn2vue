@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="node_modules/vue-material/dist/vue-material.css">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
     <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
     
 </head>
 <body>
@@ -18,7 +18,7 @@
 
             <h1 class="md-title" style="flex: 1">EU 2 EU Software Factory</h1>
 
-            <md-button class="md-icon-button">
+            <md-button class="md-icon-button" @click="saveData">
                 <md-icon>save</md-icon>
                 <md-tooltip>Save</md-tooltip>
             </md-button>
@@ -40,11 +40,28 @@
             <md-tab id="define" md-label="Define" md-active>
                 
                 <div class="bar">
-                    <ul class="list-inline">
-                        <li>Bank Problem</li>
-                        <li class="redtext">- V01 -</li>
-                        <li>Jan van Hees</li>
-                    </ul>
+                    <md-layout :md-gutter="40">
+                        <md-layout>
+                            <md-input-container>
+                                <md-input v-model="problem"></md-input>
+                            </md-input-container>
+                        </md-layout>
+
+                        <md-layout>
+                            <md-input-container>
+                                <md-select name="version" id="version" v-model="version">
+                                    <md-option v-for="ver in versions" :value="ver">{{ver}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </md-layout>
+
+                        <md-layout>
+                            <md-input-container>
+                                <md-input v-model="author"></md-input>
+                            </md-input-container>
+                        </md-layout>
+                    </md-layout>
+                    
                 </div>
 
                 <xpn-grid :grid-data="tabledata"></xpn-grid>
@@ -92,6 +109,6 @@
 
     <script src="components/xpn-grid.js"></script>
     <script src="components/xpn-element.js"></script>
-    <script src="main.js"></script>
+    <script src="assets/javascript/main.js"></script>
 </body>
 </html>

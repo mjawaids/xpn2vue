@@ -9,7 +9,7 @@ Vue.component('xpn-grid', {
 
     template: `
     <table class="table">
-        <tr v-for="row in gridData">
+        <tr v-for="row in grid">
             <td v-for="el in row">
                 <xpn-element :el="el"></xpn-element>
             </td>
@@ -24,6 +24,11 @@ Vue.component('xpn-grid', {
     },
 
     created() {
+        let save = this.save;
+        bus.$on('saveData', function () {
+            save();
+        });
+
         let clear = this.clear;
         bus.$on('clearData', function () {
             clear();
@@ -65,6 +70,13 @@ Vue.component('xpn-grid', {
     methods: {
         init() {
             this.grid = this.gridData;
+
+            if(this.grid.length != 0) {
+                return;
+            }
+
+            this.grid = JSON.parse(localStorage.getItem('xpn-data') || '[]');
+
             if(this.grid.length != 0) {
                 return;
             }
@@ -94,6 +106,11 @@ Vue.component('xpn-grid', {
                     {type:'request', value:'?'}
                 ]
             );
+        },
+
+        save() {
+            localStorage.setItem('xpn-data', JSON.stringify(this.grid) );
+            /// TODO: show confirmation notification
         },
 
         clear() {
