@@ -8,6 +8,7 @@ Vue.component('xpn-grid', {
     components: { VueMaterial },    // TODO: this should be injected instead of hardcode
 
     template: `
+    <div style="overflow: scroll; overflow-y: hidden;">
     <table class="table">
         <tr v-for="row in grid">
             <td v-for="el in row">
@@ -15,6 +16,7 @@ Vue.component('xpn-grid', {
             </td>
         </tr>
     </table>
+    </div>
     `,
 
     data() {
