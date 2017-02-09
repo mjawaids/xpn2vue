@@ -8,7 +8,7 @@ Vue.component('xpn-grid', {
     components: { VueMaterial },    // TODO: this should be injected instead of hardcode
 
     template: `
-    <div style="overflow: scroll; overflow-y: hidden;">
+    <div class="horizontal-scroll">
     <table class="table">
         <tr v-for="row in grid">
             <td v-for="el in row">

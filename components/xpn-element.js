@@ -4,7 +4,7 @@ var Response = {
     template: `
     <md-card class="md-primary">
         <md-card-content class="margin">
-            <md-input-container>
+            <md-input-container class="align-center">
                 <md-select name="response" v-model="el.value">
                     <md-option value="datastore">Datastore</md-option>
                     <md-option value="report">Report</md-option>
@@ -21,15 +21,15 @@ var Service = {
     
     template: `
     <md-layout>
-        <md-layout md-flex="70">
+        <md-layout md-flex="50">
             <md-input-container>
                 <md-input :placeholder="el.label" v-model="el.value"></md-input>
             </md-input-container>        
         </md-layout>
-        <md-layout md-flex="15">
-            <md-button @click="fireAddRow" class="md-icon-button"><md-icon class="md-primary">done</md-icon></md-button>
+        <md-layout md-flex="10">
+            <md-button @click="fireAddRow" class="md-icon-button"><md-icon md-theme="green" class="md-primary">done</md-icon></md-button>
         </md-layout>
-        <md-layout md-flex="15">
+        <md-layout md-flex="10">
             <md-button @click="fireDeleteRow" class="md-icon-button"><md-icon class="md-accent">clear</md-icon></md-button>
         </md-layout>
     </md-layout>
@@ -52,7 +52,7 @@ var Task = {
     template: `
     <md-card class="md-primary">
         <md-card-content class="margin">
-            <md-input-container>
+            <md-input-container class="align-center">
                 <md-select name="task" v-model="el.value">
                     <md-option value="controls">Controles</md-option>
                     <md-option value="executes">Executes</md-option>
@@ -68,15 +68,15 @@ var Obj = {
     props: ['el'],
     
     template: `
-        <md-layout md-gutter>
-            <md-layout md-flex="70">
+        <md-layout>
+            <md-layout md-flex="50">
                 <md-input-container class="vertical-text">
                     <md-input :placeholder="el.label" v-model="el.value"></md-input>
                 </md-input-container>        
             </md-layout>
             <md-layout md-flex="30">
                 <md-layout md-flex="100">
-                    <md-button @click="fireAddCol" class="md-icon-button vertical-text"><md-icon class="md-primary">done</md-icon></md-button>
+                    <md-button @click="fireAddCol" class="md-icon-button vertical-text"><md-icon md-theme="green" class="md-primary">done</md-icon></md-button>
                 </md-layout>
                 <md-layout md-flex="100">
                     <md-button @click="fireDeleteCol" class="md-icon-button vertical-text"><md-icon class="md-accent">clear</md-icon></md-button>
@@ -101,15 +101,15 @@ var Rule = {
     
     template: `
         <md-layout>
-            <md-layout md-flex="70">
+            <md-layout md-flex="50">
                 <md-input-container>
                     <md-input :placeholder="el.label" v-model="el.value"></md-input>
                 </md-input-container>        
             </md-layout>
-            <md-layout md-flex="15">
-                <md-button @click="fireAddRule" class="md-icon-button"><md-icon class="md-primary">done</md-icon></md-button>
+            <md-layout md-flex="10">
+                <md-button @click="fireAddRule" class="md-icon-button"><md-icon md-theme="green" class="md-primary">done</md-icon></md-button>
             </md-layout>
-            <md-layout md-flex="15">
+            <md-layout md-flex="10">
                 <md-button @click="fireDeleteRule" class="md-icon-button"><md-icon class="md-accent">clear</md-icon></md-button>
             </md-layout>
         </md-layout>
@@ -134,10 +134,8 @@ var Rules = {
     },
 
     template: `
-        <md-layout md-flex="0" style="min-width:300px;">
-            <md-layout md-flex="100" v-for="rule in el.value">
-                <rule :el="rule"></rule>
-            </md-layout>
+        <md-layout md-flex="50">
+            <rule v-for="rule in el.value" :el="rule"></rule>
         </md-layout>
     `
 };
@@ -147,14 +145,14 @@ var Subject = {
     
     template: `
         <md-layout>
-            <md-layout md-flex="70">
+            <md-layout md-flex="50">
                 <md-input-container class="vertical-text">
                     <md-input :placeholder="el.label" v-model="el.value"></md-input>
                 </md-input-container>        
             </md-layout>
             <md-layout md-flex="30">
                 <md-layout md-flex="100">
-                    <md-button @click="fireAddCol" class="md-icon-button vertical-text"><md-icon class="md-primary">done</md-icon></md-button>
+                    <md-button @click="fireAddCol" class="md-icon-button vertical-text"><md-icon md-theme="green" class="md-primary">done</md-icon></md-button>
                 </md-layout>
                 <md-layout md-flex="100">
                     <md-button @click="fireDeleteCol" class="md-icon-button vertical-text"><md-icon class="md-accent">clear</md-icon></md-button>
@@ -180,7 +178,7 @@ var Message = {
     template: `
     <md-card class="md-primary">
         <md-card-content class="margin">
-            <md-input-container>
+            <md-input-container class="align-center">
                 <md-select name="message" v-model="el.value">
                     <md-option value="create">Create</md-option>
                     <md-option value="update">Update</md-option>
@@ -198,15 +196,15 @@ var Action = {
     
     template: `
     <md-layout>
-        <md-layout md-flex="70">
+        <md-layout md-flex="50">
             <md-input-container>
                 <md-input :placeholder="el.label" v-model="el.value"></md-input>
             </md-input-container>        
         </md-layout>
-        <md-layout md-flex="15">
-            <md-button @click="fireAddRow" class="md-icon-button"><md-icon class="md-primary">done</md-icon></md-button>
+        <md-layout md-flex="10">
+            <md-button @click="fireAddRow" class="md-icon-button"><md-icon md-theme="green" class="md-primary">done</md-icon></md-button>
         </md-layout>
-        <md-layout md-flex="15">
+        <md-layout md-flex="10">
             <md-button @click="fireDeleteRow" class="md-icon-button"><md-icon class="md-accent">clear</md-icon></md-button>
         </md-layout>
     </md-layout>
@@ -229,7 +227,7 @@ var Request = {
     template: `
     <md-card class="md-primary">
         <md-card-content class="margin">
-            <md-input-container>
+            <md-input-container class="align-center">
                 <md-select name="message" v-model="el.value">
                     <md-option value="form">Form</md-option>
                     <md-option value="?" selected>?</md-option>

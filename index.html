@@ -16,7 +16,7 @@
                 <img src="assets/logo.jpeg" alt="Logo">
             </md-button>
 
-            <h1 class="md-title" style="flex: 1">EU 2 EU Software Factory</h1>
+            <h1 class="md-title flex align-center">EU 2 EU Software Factory</h1>
 
             <md-button class="md-icon-button" @click="saveData">
                 <md-icon>save</md-icon>
@@ -43,15 +43,16 @@
                     <md-layout :md-gutter="40">
                         <md-layout>
                             <md-input-container>
-                                <md-input v-model="problem"></md-input>
+                                <md-input class="align-right" v-model="problem"></md-input>
                             </md-input-container>
                         </md-layout>
 
                         <md-layout>
-                            <md-input-container>
-                                <md-select name="version" id="version" v-model="version">
+                            <md-input-container class="md-input-invalid"> <!-- TODO: this should be from computed property -->
+                                <!--<md-select name="version" id="version" v-model="version">
                                     <md-option v-for="ver in versions" :value="ver">{{ver}}</md-option>
-                                </md-select>
+                                </md-select>-->
+                                <md-input class="align-center" v-model="version"></md-input>
                             </md-input-container>
                         </md-layout>
 
@@ -101,11 +102,11 @@
 
     </div>
 
-    <!-- script src="//unpkg.com/vue@2.1.7/dist/vue.js"></script -->
-    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="//unpkg.com/vue@2.1.7/dist/vue.js"></script> 
+    <!--<script src="node_modules/vue/dist/vue.js"></script>-->
 
-    <!--<script src="//unpkg.com/vue-material@latest"></script>-->
-    <script src="node_modules/vue-material/dist/vue-material.js"></script>
+    <script src="//unpkg.com/vue-material@latest"></script>
+    <!--<script src="node_modules/vue-material/dist/vue-material.js"></script>-->
 
     <script src="components/xpn-grid.js"></script>
     <script src="components/xpn-element.js"></script>

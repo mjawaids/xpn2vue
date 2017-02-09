@@ -1,10 +1,4 @@
-table {
-    width: 100%;
-}
-
 td {
-    height: 120px;
-    text-align: center;
     border: 2px solid lightgray;
 }
 
@@ -15,20 +9,29 @@ td {
     background-color: #eee;
 }
 
-.list-inline li {
-    list-style: none;
-    display: inline;
-    padding-left: 20%;
+.margin {
+    margin:auto;
 }
-
-.redtext {
-    color: red;
-}
-
-.margin{margin:auto;}
 
 .vertical-text {
     transform: rotate(90deg);
     width: 75px;
     padding-left: 20px;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.flex {
+    flex: 1;
+}
+
+.horizontal-scroll {
+    overflow: auto; 
+    overflow-y: hidden;
 }
