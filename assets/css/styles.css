@@ -13,6 +13,20 @@ td {
     margin:auto;
 }
 
+input {
+    border: none;
+    font-family: inherit;
+    background-color: inherit;
+}
+
+.width-med {
+    width: 230px;
+}
+
+.width-small {
+    width: 40px;
+}
+
 .vertical-text {
     transform: rotate(90deg);
     width: 75px;

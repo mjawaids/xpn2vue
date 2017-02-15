@@ -40,29 +40,13 @@
             <md-tab id="define" md-label="Define" md-active>
                 
                 <div class="bar">
-                    <md-layout :md-gutter="40">
-                        <md-layout>
-                            <md-input-container>
-                                <md-input class="align-right" v-model="problem"></md-input>
-                            </md-input-container>
-                        </md-layout>
-
-                        <md-layout>
-                            <md-input-container class="md-input-invalid"> <!-- TODO: this should be from computed property -->
-                                <!--<md-select name="version" id="version" v-model="version">
-                                    <md-option v-for="ver in versions" :value="ver">{{ver}}</md-option>
-                                </md-select>-->
-                                <md-input class="align-center" v-model="version"></md-input>
-                            </md-input-container>
-                        </md-layout>
-
-                        <md-layout>
-                            <md-input-container>
-                                <md-input v-model="author"></md-input>
-                            </md-input-container>
-                        </md-layout>
-                    </md-layout>
-                    
+                    <div class="align-center">
+                        <input class="align-right width-med" v-model="problem" maxlength="30"></input>
+                        <span>&nbsp;-</span>
+                        <input class="align-center width-small" v-model="version" maxlength="5"></input>
+                        <span>-&nbsp;</span>
+                        <input class="width-med" v-model="author" maxlength="30"></input>
+                    </div>
                 </div>
 
                 <xpn-grid :grid-data="tabledata"></xpn-grid>
@@ -102,11 +86,11 @@
 
     </div>
 
-    <script src="//unpkg.com/vue@2.1.7/dist/vue.js"></script> 
-    <!--<script src="node_modules/vue/dist/vue.js"></script>-->
+    <!--<script src="//unpkg.com/vue@2.1.7/dist/vue.js"></script> -->
+    <script src="node_modules/vue/dist/vue.js"></script>
 
-    <script src="//unpkg.com/vue-material@latest"></script>
-    <!--<script src="node_modules/vue-material/dist/vue-material.js"></script>-->
+    <!--<script src="//unpkg.com/vue-material@latest"></script>-->
+    <script src="node_modules/vue-material/dist/vue-material.js"></script>
 
     <script src="components/xpn-grid.js"></script>
     <script src="components/xpn-element.js"></script>
