@@ -9,13 +9,13 @@ Vue.component('xpn-grid', {
 
     template: `
     <div class="horizontal-scroll">
-    <table class="table">
-        <tr v-for="row in grid">
-            <td v-for="el in row">
-                <xpn-element :el="el"></xpn-element>
-            </td>
-        </tr>
-    </table>
+        <table class="table">
+            <tr v-for="row in grid">
+                <td v-for="el in row">
+                    <xpn-element :el="el"></xpn-element>
+                </td>
+            </tr>
+        </table>
     </div>
     `,
 

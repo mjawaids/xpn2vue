@@ -2,17 +2,13 @@ var Response = {
     props: ['el'],
     
     template: `
-    <md-card class="md-primary">
-        <md-card-content class="margin">
-            <md-input-container class="align-center">
-                <md-select name="response" v-model="el.value">
-                    <md-option value="datastore">Datastore</md-option>
-                    <md-option value="report">Report</md-option>
-                    <md-option value="?">?</md-option>
-                </md-select>
-            </md-input-container>
-        </md-card-content>
-    </md-card>
+    <div  style="width:40px; height:40px; margin:auto">
+        <md-select name="response" v-model="el.value" style="min-width:40px;">
+            <md-option value="datastore">Datastore</md-option>
+            <md-option value="report">Report</md-option>
+            <md-option value="?">?</md-option>
+        </md-select>
+    </div>
     `
 };
 
@@ -20,19 +16,14 @@ var Service = {
     props: ['el'],
     
     template: `
-    <md-layout>
-        <md-layout md-flex="50">
-            <md-input-container>
-                <md-input :placeholder="el.label" v-model="el.value"></md-input>
-            </md-input-container>        
-        </md-layout>
-        <md-layout md-flex="10">
-            <md-button @click="fireAddRow" class="md-icon-button"><md-icon md-theme="green" class="md-primary">done</md-icon></md-button>
-        </md-layout>
-        <md-layout md-flex="10">
-            <md-button @click="fireDeleteRow" class="md-icon-button"><md-icon class="md-accent">clear</md-icon></md-button>
-        </md-layout>
-    </md-layout>
+    <div class="height-20" style="padding-left: 5px;width: 200px;">        
+        <input class="min-width-small" :placeholder="el.label" v-model="el.value"></input>
+
+        <span style="margin-bottom:5px;">
+        <md-button @click="fireAddRow" class="md-icon-button"><md-icon md-theme="green" class="md-primary">done</md-icon></md-button>
+        <md-button @click="fireDeleteRow" class="md-icon-button"><md-icon class="md-accent">clear</md-icon></md-button>
+        </span>
+    </div>
     `,
 
     methods: {
@@ -50,17 +41,13 @@ var Task = {
     props: ['el'],
     
     template: `
-    <md-card class="md-primary">
-        <md-card-content class="margin">
-            <md-input-container class="align-center">
-                <md-select name="task" v-model="el.value">
-                    <md-option value="controls">Controles</md-option>
-                    <md-option value="executes">Executes</md-option>
-                    <md-option value="?">?</md-option>
-                </md-select>
-            </md-input-container>
-        </md-card-content>
-    </md-card>
+    <div style="width:40px; height:40px; margin:auto">
+        <md-select name="task" v-model="el.value" style="min-width:40px;">
+            <md-option value="controls">Controles</md-option>
+            <md-option value="executes">Executes</md-option>
+            <md-option value="?">?</md-option>
+        </md-select>
+    </div>
     `
 };
 
@@ -68,21 +55,18 @@ var Obj = {
     props: ['el'],
     
     template: `
-        <md-layout>
-            <md-layout md-flex="50">
-                <md-input-container class="vertical-text">
-                    <md-input :placeholder="el.label" v-model="el.value"></md-input>
-                </md-input-container>        
-            </md-layout>
-            <md-layout md-flex="30">
-                <md-layout md-flex="100">
-                    <md-button @click="fireAddCol" class="md-icon-button vertical-text"><md-icon md-theme="green" class="md-primary">done</md-icon></md-button>
-                </md-layout>
-                <md-layout md-flex="100">
-                    <md-button @click="fireDeleteCol" class="md-icon-button vertical-text"><md-icon class="md-accent">clear</md-icon></md-button>
-                </md-layout>
-            </md-layout>
-        </md-layout>
+    <div class="vertical">
+        
+        <div style="height:50%;">
+            <md-button @click="fireAddCol" class="md-icon-button"><md-icon md-theme="green" class="md-primary">done</md-icon></md-button>
+            <md-button @click="fireDeleteCol" class="md-icon-button"><md-icon class="md-accent">clear</md-icon></md-button>
+        </div>
+        
+        <div style="height:50%; padding: 10px;">
+            <input class="min-width-small" :placeholder="el.label" v-model="el.value"></input>
+        </div>
+        
+    </div>
     `,
 
     methods: {
@@ -100,19 +84,17 @@ var Rule = {
     props: ['el'],
     
     template: `
-        <md-layout>
-            <md-layout md-flex="50">
-                <md-input-container>
-                    <md-input :placeholder="el.label" v-model="el.value"></md-input>
-                </md-input-container>        
-            </md-layout>
-            <md-layout md-flex="10">
-                <md-button @click="fireAddRule" class="md-icon-button"><md-icon md-theme="green" class="md-primary">done</md-icon></md-button>
-            </md-layout>
-            <md-layout md-flex="10">
-                <md-button @click="fireDeleteRule" class="md-icon-button"><md-icon class="md-accent">clear</md-icon></md-button>
-            </md-layout>
-        </md-layout>
+    <div class="height-20">
+        <span>&nbsp;</span>
+        <input class="min-width-small" :placeholder="el.label" v-model="el.value"></input>
+        <span>&nbsp;</span>
+        
+        <md-button @click="fireAddRule" class="md-icon-button"><md-icon md-theme="green" class="md-primary">done</md-icon></md-button>
+        
+        <span>&nbsp;</span>
+        <md-button @click="fireDeleteRule" class="md-icon-button"><md-icon class="md-accent">clear</md-icon></md-button>
+        <span>&nbsp;</span>
+    </div>
     `,
 
     methods: {
@@ -146,21 +128,18 @@ var Subject = {
     props: ['el'],
     
     template: `
-        <md-layout>
-            <md-layout md-flex="50">
-                <md-input-container class="vertical-text">
-                    <md-input :placeholder="el.label" v-model="el.value"></md-input>
-                </md-input-container>        
-            </md-layout>
-            <md-layout md-flex="30">
-                <md-layout md-flex="100">
-                    <md-button @click="fireAddCol" class="md-icon-button vertical-text"><md-icon md-theme="green" class="md-primary">done</md-icon></md-button>
-                </md-layout>
-                <md-layout md-flex="100">
-                    <md-button @click="fireDeleteCol" class="md-icon-button vertical-text"><md-icon class="md-accent">clear</md-icon></md-button>
-                </md-layout>
-            </md-layout>
-        </md-layout>
+    <div class="vertical">
+        
+        <div style="height:50%;">
+            <md-button @click="fireAddCol" class="md-icon-button"><md-icon md-theme="green" class="md-primary">done</md-icon></md-button>
+            <md-button @click="fireDeleteCol" class="md-icon-button"><md-icon class="md-accent">clear</md-icon></md-button>
+        </div>
+        
+        <div style="height:50%; padding: 10px;">
+            <input class="min-width-small" :placeholder="el.label" v-model="el.value"></input>
+        </div>
+        
+    </div>
     `,
 
     methods: {
@@ -178,18 +157,14 @@ var Message = {
     props: ['el'],
     
     template: `
-    <md-card class="md-primary">
-        <md-card-content class="margin">
-            <md-input-container class="align-center">
-                <md-select name="message" v-model="el.value">
-                    <md-option value="create">Create</md-option>
-                    <md-option value="update">Update</md-option>
-                    <md-option value="delete">Delete</md-option>
-                    <md-option value="?">?</md-option>
-                </md-select>
-            </md-input-container>
-        </md-card-content>
-    </md-card>
+    <div style="width:40px; height:40px; margin:auto">
+        <md-select name="message" v-model="el.value" style="min-width:40px;">
+            <md-option value="create">Create</md-option>
+            <md-option value="update">Update</md-option>
+            <md-option value="delete">Delete</md-option>
+            <md-option value="?">?</md-option>
+        </md-select>
+    </div>
     `
 };
 
@@ -197,19 +172,17 @@ var Action = {
     props: ['el'],
     
     template: `
-    <md-layout>
-        <md-layout md-flex="50">
-            <md-input-container>
-                <md-input :placeholder="el.label" v-model="el.value"></md-input>
-            </md-input-container>        
-        </md-layout>
-        <md-layout md-flex="10">
-            <md-button @click="fireAddRow" class="md-icon-button"><md-icon md-theme="green" class="md-primary">done</md-icon></md-button>
-        </md-layout>
-        <md-layout md-flex="10">
-            <md-button @click="fireDeleteRow" class="md-icon-button"><md-icon class="md-accent">clear</md-icon></md-button>
-        </md-layout>
-    </md-layout>
+    <div class="height-20">
+        <span>&nbsp;</span>
+        <input class="min-width-small" :placeholder="el.label" v-model="el.value"></input>
+        <span>&nbsp;</span>
+        
+        <md-button @click="fireAddRow" class="md-icon-button"><md-icon md-theme="green" class="md-primary">done</md-icon></md-button>
+        
+        <span>&nbsp;</span>
+        <md-button @click="fireDeleteRow" class="md-icon-button"><md-icon class="md-accent">clear</md-icon></md-button>
+        <span>&nbsp;</span>
+    </div>
     `,
 
     methods: {
@@ -227,16 +200,12 @@ var Request = {
     props: ['el'],
     
     template: `
-    <md-card class="md-primary">
-        <md-card-content class="margin">
-            <md-input-container class="align-center">
-                <md-select name="message" v-model="el.value">
-                    <md-option value="form">Form</md-option>
-                    <md-option value="?" selected>?</md-option>
-                </md-select>
-            </md-input-container>
-        </md-card-content>
-    </md-card>
+    <div style="width:40px; height:40px; margin:auto">
+        <md-select name="request" v-model="el.value" style="min-width:40px;">
+            <md-option value="form">Form</md-option>
+            <md-option value="?" selected>?</md-option>
+        </md-select>
+    </div>
     `
 };
 
