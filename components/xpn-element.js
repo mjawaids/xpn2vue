@@ -84,7 +84,7 @@ var Rule = {
     props: ['el'],
     
     template: `
-    <div class="height-20">
+    <div class="height-20 margin">
         <span>&nbsp;</span>
         <input class="min-width-small" :placeholder="el.label" v-model="el.value"></input>
         <span>&nbsp;</span>
@@ -116,10 +116,8 @@ var Rules = {
     },
 
     template: `
-        <md-layout md-flex="10" class="width-200-300">
-            <md-layout md-flex="100" v-for="rule in el.value">
-                <rule :el="rule"></rule>
-            </md-layout>
+        <md-layout md-flex="10" class="width-200-300" style="width:230px;height:130px;overflow-y:auto;">
+            <rule v-for="rule in el.value" :el="rule"></rule>
         </md-layout>
     `
 };
