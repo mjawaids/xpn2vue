@@ -5,13 +5,18 @@ var bus = new Vue();
 Vue.component('xpn-grid', {
     props: { gridData: {type: Array, required: false } },
 
-    components: { VueMaterial },    // TODO: this should be injected instead of hardcode
+    components: { VueMaterial },
 
     template: `
     <div class="horizontal-scroll">
         <table class="table">
             <tr v-for="row in grid">
-                <td v-for="el in row">
+                <td v-for="el in row" :class="{ 
+                        a: el.type == 'rules',
+                        b: el.type == 'service' || el.type == 'action',
+                        c: el.type == 'obj' || el.type == 'subject',
+                        d: el.type == 'response' || el.type == 'task' || el.type == 'message' || el.type == 'request',
+                    }">
                     <xpn-element :el="el"></xpn-element>
                 </td>
             </tr>

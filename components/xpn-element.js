@@ -2,8 +2,8 @@ var Response = {
     props: ['el'],
     
     template: `
-    <div  style="width:40px; height:40px; margin:auto">
-        <md-select name="response" v-model="el.value" style="min-width:40px;">
+    <div class="corner-style">
+        <md-select name="response" v-model="el.value" class="md-select-value corner-style">
             <md-option value="datastore">Datastore</md-option>
             <md-option value="report">Report</md-option>
             <md-option value="?">?</md-option>
@@ -16,13 +16,12 @@ var Service = {
     props: ['el'],
     
     template: `
-    <div class="height-20" style="padding-left: 5px;width: 200px;">        
-        <input class="min-width-small" :placeholder="el.label" v-model="el.value"></input>
+    <div class="">
+        <input class="min-width-small height-20" :placeholder="el.label" v-model="el.value"></input>
 
-        <span style="margin-bottom:5px;">
-        <md-button @click="fireAddRow" class="md-icon-button"><md-icon md-theme="green" class="md-primary">done</md-icon></md-button>
-        <md-button @click="fireDeleteRow" class="md-icon-button"><md-icon class="md-accent">clear</md-icon></md-button>
-        </span>
+        <md-button @click="fireAddRow" class="btn-style btn-green"><i class="material-icons font-medium">done</i></md-button>
+        <md-button @click="fireDeleteRow" class="btn-style btn-red"><i class="material-icons font-medium">clear</i></md-button>
+        
     </div>
     `,
 
@@ -41,9 +40,9 @@ var Task = {
     props: ['el'],
     
     template: `
-    <div style="width:40px; height:40px; margin:auto">
-        <md-select name="task" v-model="el.value" style="min-width:40px;">
-            <md-option value="controls">Controles</md-option>
+    <div class="corner-style">
+        <md-select name="task" v-model="el.value" class="md-select-value corner-style">
+            <md-option value="controls">Controls</md-option>
             <md-option value="executes">Executes</md-option>
             <md-option value="?">?</md-option>
         </md-select>
@@ -56,15 +55,11 @@ var Obj = {
     
     template: `
     <div class="vertical">
+
+        <input class="min-width-small height-20" :placeholder="el.label" v-model="el.value"></input>
         
-        <div style="height:50%;">
-            <md-button @click="fireAddCol" class="md-icon-button"><md-icon md-theme="green" class="md-primary">done</md-icon></md-button>
-            <md-button @click="fireDeleteCol" class="md-icon-button"><md-icon class="md-accent">clear</md-icon></md-button>
-        </div>
-        
-        <div style="height:50%; padding: 10px;">
-            <input class="min-width-small" :placeholder="el.label" v-model="el.value"></input>
-        </div>
+        <md-button @click="fireAddCol" class="btn-style btn-green"><i class="material-icons font-medium">done</i></md-button>
+        <md-button @click="fireDeleteCol" class="btn-style btn-red"><i class="material-icons font-medium">clear</i></md-button>
         
     </div>
     `,
@@ -84,16 +79,12 @@ var Rule = {
     props: ['el'],
     
     template: `
-    <div class="height-20 margin">
-        <span>&nbsp;</span>
-        <input class="min-width-small" :placeholder="el.label" v-model="el.value"></input>
-        <span>&nbsp;</span>
+    <div class="">        
+        <input class="min-width-small height-20" :placeholder="el.label" v-model="el.value"></input>
+
+        <md-button @click="fireAddRule" class="btn-style btn-green"><i class="material-icons font-medium">done</i></md-button>
+        <md-button @click="fireDeleteRule" class="btn-style btn-red"><i class="material-icons font-medium">clear</i></md-button>
         
-        <md-button @click="fireAddRule" class="md-icon-button"><md-icon md-theme="green" class="md-primary">done</md-icon></md-button>
-        
-        <span>&nbsp;</span>
-        <md-button @click="fireDeleteRule" class="md-icon-button"><md-icon class="md-accent">clear</md-icon></md-button>
-        <span>&nbsp;</span>
     </div>
     `,
 
@@ -116,7 +107,7 @@ var Rules = {
     },
 
     template: `
-        <md-layout md-flex="10" class="width-200-300" style="width:230px;height:130px;overflow-y:auto;">
+        <md-layout class="e">
             <rule v-for="rule in el.value" :el="rule"></rule>
         </md-layout>
     `
@@ -128,14 +119,10 @@ var Subject = {
     template: `
     <div class="vertical">
         
-        <div style="height:50%;">
-            <md-button @click="fireAddCol" class="md-icon-button"><md-icon md-theme="green" class="md-primary">done</md-icon></md-button>
-            <md-button @click="fireDeleteCol" class="md-icon-button"><md-icon class="md-accent">clear</md-icon></md-button>
-        </div>
-        
-        <div style="height:50%; padding: 10px;">
-            <input class="min-width-small" :placeholder="el.label" v-model="el.value"></input>
-        </div>
+        <input class="min-width-small height-20" :placeholder="el.label" v-model="el.value"></input>
+    
+        <md-button @click="fireAddCol" class="btn-style btn-green"><i class="material-icons font-medium">done</i></md-button>
+        <md-button @click="fireDeleteCol" class="btn-style btn-red"><i class="material-icons font-medium">clear</i></md-button>
         
     </div>
     `,
@@ -155,8 +142,8 @@ var Message = {
     props: ['el'],
     
     template: `
-    <div style="width:40px; height:40px; margin:auto">
-        <md-select name="message" v-model="el.value" style="min-width:40px;">
+    <div class="corner-style">
+        <md-select name="message" v-model="el.value" class="md-select-value corner-style">
             <md-option value="create">Create</md-option>
             <md-option value="update">Update</md-option>
             <md-option value="delete">Delete</md-option>
@@ -170,16 +157,12 @@ var Action = {
     props: ['el'],
     
     template: `
-    <div class="height-20">
-        <span>&nbsp;</span>
-        <input class="min-width-small" :placeholder="el.label" v-model="el.value"></input>
-        <span>&nbsp;</span>
+    <div class="">        
+        <input class="min-width-small height-20" :placeholder="el.label" v-model="el.value"></input>
+
+        <md-button @click="fireAddRow" class="btn-style btn-green"><i class="material-icons font-medium">done</i></md-button>
+        <md-button @click="fireDeleteRow" class="btn-style btn-red"><i class="material-icons font-medium">clear</i></md-button>
         
-        <md-button @click="fireAddRow" class="md-icon-button"><md-icon md-theme="green" class="md-primary">done</md-icon></md-button>
-        
-        <span>&nbsp;</span>
-        <md-button @click="fireDeleteRow" class="md-icon-button"><md-icon class="md-accent">clear</md-icon></md-button>
-        <span>&nbsp;</span>
     </div>
     `,
 
@@ -198,8 +181,8 @@ var Request = {
     props: ['el'],
     
     template: `
-    <div style="width:40px; height:40px; margin:auto">
-        <md-select name="request" v-model="el.value" style="min-width:40px;">
+    <div class="corner-style">
+        <md-select name="request" v-model="el.value" class="md-select-value corner-style">
             <md-option value="form">Form</md-option>
             <md-option value="?" selected>?</md-option>
         </md-select>

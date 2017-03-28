@@ -4,6 +4,7 @@
 
 td {
     border: 2px solid lightgray;
+    white-space: nowrap;
 }
 
 .bar {
@@ -20,9 +21,16 @@ td {
 input {
     height: 40px;
     border: none;
-    /*border-bottom-style: groove;*/
     font-family: inherit;
     background-color: inherit;
+}
+
+.font-xlarge {
+    font-size: x-large;
+}
+
+.font-medium {
+    font-size: medium;
 }
 
 .width-med {
@@ -34,24 +42,18 @@ input {
 }
 
 .min-width-small {
-    min-width: 80px;
-    width: 80px;
+    min-width: 160px;
+    width: 160px;
 }
 
 .height-20 {
-    height: 40px;
-}
-
-.height-80 {
-    height: 80px;
-    min-height: 80px;
+    height: 20px;
 }
 
 .vertical {
     transform: rotate(90deg);
-    height:120px; 
-    width:120px; 
-    padding:6px;
+    position: absolute;
+    transform-origin: 10px 12px;
 }
 
 .align-center {
@@ -71,7 +73,61 @@ input {
     overflow-y: hidden;
 }
 
-.width-200-300 {
-    min-width: 230px;
-    max-width: 300px;
+.corner-style {
+    width:20px !important;
+    height:20px !important;
+    margin:auto;
+}
+
+.btn-style {
+    width: 20px !important;
+    min-width: 20px !important;
+
+    height: 20px !important;
+    min-height: 20px !important;
+
+    padding: 0px !important;
+    margin: 0px !important;
+
+    line-height: 0;
+}
+
+.btn-green {
+    color: #4caf50;
+}
+
+.btn-red {
+    color: #f44336;
+}
+
+.md-select-value {
+    padding-right: 20px !important;
+    line-height: 20px !important;
+    min-width:20px;
+}
+
+.a {
+  width:230px;
+  height:214px
+}
+
+.b {
+  width: 214px;
+  height: 20px;
+}
+
+.c {
+  width: 20px;
+  height: 214px;
+  vertical-align: top;
+}
+
+.d {
+  width: 20px;
+  height: 20px;
+}
+
+.e {
+    overflow-y: auto;
+    max-height: 214px;
 }
