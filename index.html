@@ -12,27 +12,6 @@
 <body>
     <div id="app">
         <h2 class="flex align-center">EU 2 EU Software Factory</h2>
-        
-        <!--<md-toolbar class="md-dense">
-            <md-button class="md-icon-button">
-                <img src="assets/images/logo.jpeg" alt="Logo">
-            </md-button>
-
-            <span class="flex"></span>
-
-            <md-button class="md-icon-button" @click="saveData">
-                <md-icon>save</md-icon>
-                <md-tooltip>Save</md-tooltip>
-            </md-button>
-            <md-button class="md-icon-button" @click="confirmCancel('cancelDialog')">
-                <md-icon>cancel</md-icon>
-                <md-tooltip>Clear</md-tooltip>
-            </md-button>
-            <md-button class="md-icon-button">
-                <md-icon>person_outline</md-icon>
-                <md-tooltip>Login</md-tooltip>
-            </md-button>
-        </md-toolbar>-->
 
         <md-tabs md-fixed>
             <md-tab id="import" md-label="Import">
@@ -41,26 +20,23 @@
 
             <md-tab id="define" md-label="Define" md-active>
                 
-                <div class="bar">
-                <md-layout>    
-                    <md-layout md-flex="30"></md-layout>
-                    <md-layout md-flex="50" class="align-center">
+                <md-layout class="bar">    
+
+                    <md-layout md-flex-offset="20">
                         <input class="align-right width-med font-xlarge" v-model="problem" maxlength="30"></input>
                         <span class="font-xlarge">&nbsp;_</span>
                         <input class="align-center width-small font-xlarge" v-model="version" maxlength="5"></input>
                         <span class="font-xlarge">_&nbsp;</span>
                         <input class="width-med font-xlarge" v-model="author" maxlength="30"></input>
-                        <span>&nbsp;</span>
                     </md-layout>
-                    
-                    <md-layout md-flex="20" class="align-right">
+
+                    <md-layout md-flex="10" class="align-right">
                         <md-button class="md-icon-button"><md-icon md-theme="green" class="md-primary">done</md-icon></md-button>
                         <md-button class="md-icon-button"><md-icon class="md-accent">clear</md-icon></md-button>
                     </md-layout>
-                        
-                </md-layout>
-                </div>
 
+                </md-layout>
+            
                 <xpn-grid :grid-data="tabledata"></xpn-grid>
 
             </md-tab>
