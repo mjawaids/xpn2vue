@@ -1,88 +1,17 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
     <title>Company Concept</title>
-    <!--<link rel="stylesheet" href="//unpkg.com/vue-material@latest/dist/vue-material.css">-->
-    <link rel="stylesheet" href="node_modules/vue-material/dist/vue-material.css">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
     <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="node_modules/vue-material/dist/vue-material.css">
+  </head>
+  <body>
     
-</head>
-<body>
-    <div id="app">
-        <h2 class="flex align-center">EU 2 EU Software Factory</h2>
-
-        <md-tabs md-fixed>
-            <md-tab id="import" md-label="Import">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.</p>
-            </md-tab>
-
-            <md-tab id="define" md-label="Define" md-active>
-                
-                <md-layout class="bar">    
-
-                    <md-layout md-flex-offset="20">
-                        <input class="align-right width-med font-xlarge" v-model="problem" maxlength="30"></input>
-                        <span class="font-xlarge">&nbsp;_</span>
-                        <input class="align-center width-small font-xlarge" v-model="version" maxlength="5"></input>
-                        <span class="font-xlarge">_&nbsp;</span>
-                        <input class="width-med font-xlarge" v-model="author" maxlength="30"></input>
-                    </md-layout>
-
-                    <md-layout md-flex="15" class="align-right">
-                        <md-button class="md-icon-button"><md-icon md-theme="green" class="md-primary">done</md-icon></md-button>
-                        <md-button class="md-icon-button"><md-icon class="md-accent">clear</md-icon></md-button>
-                    </md-layout>
-
-                </md-layout>
-            
-                <xpn-grid :grid-data="tabledata"></xpn-grid>
-
-            </md-tab>
-
-            <md-tab id="design" md-label="Design">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
-            </md-tab>
-
-            <md-tab id="develop" md-label="Develop">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
-            </md-tab>
-
-            <md-tab id="deploy" md-label="Deploy">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
-            </md-tab>
-
-            <md-tab id="export" md-label="Export">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
-            </md-tab>
-        </md-tabs>
-
-        <!-- CONFIRMATION DIALOG FOR CLEARING DATA -->
-        <md-dialog-confirm
-            md-title="Are you sure?"
-            md-content-html="This will clear the existing state."
-            md-ok-text="Yes"
-            md-cancel-text="No"
-            @close="onClose"
-            ref="cancelDialog">
-        </md-dialog-confirm>
-
-        <!--<md-snackbar md-position="bottom left" ref="snackbar" md-duration="4000">
-            <span>Cannot delete.</span>
-            <md-button class="md-accent" md-theme="light-blue" @click="$refs.snackbar.close()">Close</md-button>
-        </md-snackbar>-->
-
-    </div>
-
-    <!--<script src="//unpkg.com/vue@2.1.7/dist/vue.js"></script> -->
-    <script src="node_modules/vue/dist/vue.js"></script>
-
-    <!--<script src="//unpkg.com/vue-material@latest"></script>-->
-    <script src="node_modules/vue-material/dist/vue-material.js"></script>
-
-    <script src="components/xpn-grid.js"></script>
-    <script src="components/xpn-element.js"></script>
-    <script src="assets/javascript/main.js"></script>
-</body>
+    <div id="app"></div>
+    
+    <script src="/dist/build.js"></script>
+    
+  </body>
 </html>

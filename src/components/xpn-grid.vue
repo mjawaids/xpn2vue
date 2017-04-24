@@ -1,30 +1,29 @@
-// Declare an event bus
-var bus = new Vue();
+<template>
+  <div id="xpn-grid" class="horizontal-scroll">
+    <table class="table">
+        <tr v-for="row in grid">
+            <td v-for="el in row" :class="{ 
+                    a: el.type == 'rules',
+                    b: el.type == 'service' || el.type == 'action',
+                    c: el.type == 'obj' || el.type == 'subject',
+                    d: el.type == 'response' || el.type == 'task' || el.type == 'message' || el.type == 'request',
+                }">
+                <xpn-element :el="el"></xpn-element>
+            </td>
+        </tr>
+    </table>
+  </div>
+</template>
 
-// Main Grid component
-Vue.component('xpn-grid', {
-    props: { gridData: {type: Array, required: false } },
+<script>
+import xpnElement from './xpn-element.vue';
 
-    components: { VueMaterial },
+export default {
+    name: 'xpn-grid',
+    props: { gridData: { type: Array, required: false } },
+    components: { xpnElement },
 
-    template: `
-    <div class="horizontal-scroll">
-        <table class="table">
-            <tr v-for="row in grid">
-                <td v-for="el in row" :class="{ 
-                        a: el.type == 'rules',
-                        b: el.type == 'service' || el.type == 'action',
-                        c: el.type == 'obj' || el.type == 'subject',
-                        d: el.type == 'response' || el.type == 'task' || el.type == 'message' || el.type == 'request',
-                    }">
-                    <xpn-element :el="el"></xpn-element>
-                </td>
-            </tr>
-        </table>
-    </div>
-    `,
-
-    data() {
+    data () {
         return {
             grid: []
         }
@@ -32,48 +31,48 @@ Vue.component('xpn-grid', {
 
     created() {
         let save = this.save;
-        bus.$on('saveData', function () {
+        this.$bus.on('saveData', function () {
             save();
         });
 
         let clear = this.clear;
-        bus.$on('clearData', function () {
+        this.$bus.on('clearData', function () {
             clear();
         });
 
         let addrow = this.addRow;
-        bus.$on('addRow', function (param) {
+        this.$bus.on('addRow', function (param) {
             addrow(param);
         });
 
         let delrow = this.deleteRow;
-        bus.$on('deleteRow', function (param) {
+        this.$bus.on('deleteRow', function (param) {
             delrow(param);
         });
 
         let addcol = this.addCol;
-        bus.$on('addCol', function (param) {
+        this.$bus.on('addCol', function (param) {
             addcol(param);
         });
 
         let delcol = this.deleteCol;
-        bus.$on('deleteCol', function (param) {
+        this.$bus.on('deleteCol', function (param) {
             delcol(param);
         });
 
         let addrule = this.addRule;
-        bus.$on('addRule', function () {
+        this.$bus.on('addRule', function () {
             addrule();
         });
 
         let delrule = this.deleteRule;
-        bus.$on('deleteRule', function (param) {
+        this.$bus.on('deleteRule', function (param) {
             delrule(param);
         });
 
         this.init();
     },
-    
+
     methods: {
         init() {
             this.grid = this.gridData;
@@ -364,4 +363,43 @@ Vue.component('xpn-grid', {
             }
         }
     }
-});
+}
+</script>
+
+<style>
+.table {
+    margin: auto;
+}
+
+td {
+    border: 2px solid lightgray;
+    white-space: nowrap;
+}
+
+.horizontal-scroll {
+    overflow: auto; 
+    overflow-y: hidden;
+}
+
+.a {
+  width:230px;
+  height:214px
+}
+
+.b {
+  width: 214px;
+  height: 20px;
+}
+
+.c {
+  width: 20px;
+  height: 214px;
+  vertical-align: top;
+}
+
+.d {
+  width: 20px;
+  height: 20px;
+}
+
+</style>
