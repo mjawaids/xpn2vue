@@ -1,5 +1,5 @@
 <template>
-  <div id="xpn-grid" class="horizontal-scroll">
+  <div id="xpn-design" class="horizontal-scroll">
     <table class="table">
         <tr v-for="row in grid">
             <td v-for="el in row" :class="{
@@ -8,7 +8,7 @@
                     c: el.type == 'obj' || el.type == 'subject',
                     d: el.type == 'response' || el.type == 'task' || el.type == 'message' || el.type == 'request',
                 }">
-                <xpn-element :el="el"></xpn-element>
+                <xpn-element0 :el="el"></xpn-element0>
             </td>
         </tr>
     </table>
@@ -16,12 +16,12 @@
 </template>
 
 <script>
-import xpnElement from './xpn-element.vue';
+import xpnElement0 from './xpn-element0.vue';
 
 export default {
-    name: 'xpn-grid',
+    name: 'xpn-design',
     props: { gridData: { type: Array, required: false } },
-    components: { xpnElement },
+    components: { xpnElement0 },
 
     data () {
         return {
@@ -40,15 +40,9 @@ export default {
             clear();
         });
 
-        let addrow = this.addRow;
-        this.$bus.on('addRow', function (param) {
-            addrow(param);
-        });
 
-        let delrow = this.deleteRow;
-        this.$bus.on('deleteRow', function (param) {
-            delrow(param);
-        });
+
+
 
         let addcol = this.addCol;
         this.$bus.on('addCol', function (param) {
@@ -303,22 +297,7 @@ export default {
             return el;
         },
 
-        addCol(atLeft = true) {
-            let rowLength = this.grid[0].length;
-            let colIndex = atLeft ? 0 : rowLength - 1;
 
-            for(let i = 0; i<this.grid.length; i++) {
-                let el = this.grid[i][colIndex];
-                let newEl = this.createElementOfType(el.type);
-
-                if(atLeft) {
-                    this.grid[i].unshift(newEl);
-                    continue;
-                }
-
-                this.grid[i].push(newEl);
-            }
-        },
 
         deleteCol(obj) {
             let midColIndex = this.findMidColofMidRow();
@@ -339,13 +318,7 @@ export default {
             }
         },
 
-        addRule() {
-            let midRowIndex = this.findMidRow();
-            let midColIndex = this.findMidColofMidRow();
 
-            let newRule = {type:'rule', label:'New Rule', value:''};
-            this.grid[midRowIndex][midColIndex].value.push( newRule );
-        },
 
         deleteRule(rule) {
             let rules = this.findRules();

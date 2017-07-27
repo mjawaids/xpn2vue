@@ -9,17 +9,17 @@
 
 <script>
 import response from './response.vue';
-import service from './service.vue';
+import service from './service0.vue';
 import task from './task.vue';
-import obj from './obj.vue';
-import rules from './rules.vue';
-import subject from './subject.vue';
+import obj from './obj0.vue';
+import rules from './rules0.vue';
+import subject from './subject0.vue';
 import message from './message.vue';
-import action from './action.vue';
+import action from './action0.vue';
 import request from './request.vue';
 
 export default {
-    name: 'xpn-element',
+    name: 'xpn-element0',
     props:['el'],
     components: {
         response,

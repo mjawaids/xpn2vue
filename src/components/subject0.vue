@@ -3,21 +3,19 @@
 
         <input class="min-width-small height-20" :placeholder="el.label" v-model="el.value"></input>
 
-        <md-button @click.native="fireAddCol" class="btn-style btn-green"><i class="material-icons font-medium">done</i></md-button>
-        <md-button @click.native="fireDeleteCol" class="btn-style btn-red"><i class="material-icons font-medium">clear</i></md-button>
-</div>
 
 
+    </div>
 </template>
 
 <script>
 export default {
-    name: 'obj',
+    name: 'subject',
     props: ['el'],
 
     methods: {
         fireAddCol() {
-            this.$bus.emit('addCol', true);
+            this.$bus.emit('addCol', false);
         },
 
         fireDeleteCol() {
@@ -32,6 +30,7 @@ export default {
     transform: rotate(90deg);
     position: absolute;
     transform-origin: 10px 12px;
+  
 }
 
 .min-width-small {
