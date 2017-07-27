@@ -1,5 +1,10 @@
 <template>
+
   <div id="app">
+
+    <xpn-grid></xpn-grid>
+  	<xpn-design></xpn-design>
+
     <h2 class="flex align-center">EU 2 EU Software Factory</h2>
 
         <md-tabs md-fixed>
@@ -8,8 +13,8 @@
             </md-tab>
 
             <md-tab id="define" md-label="Define" md-active>
-                
-                <md-layout class="bar">    
+
+                <md-layout class="bar">
 
                     <md-layout md-flex-offset="20">
                         <input class="align-right width-med font-xlarge" v-model="problem" maxlength="30"></input>
@@ -25,14 +30,19 @@
                     </md-layout>
 
                 </md-layout>
-            
+
                 <xpn-grid :grid-data="tabledata"></xpn-grid>
 
             </md-tab>
 
-            <md-tab id="design" md-label="Design">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
+
+
+            <md-tab id="design" md-label="Design" md-active>
+
+                <xpn-design :grid-data="tabledata"></xpn-design>
+
             </md-tab>
+
 
             <md-tab id="develop" md-label="Develop">
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
@@ -61,20 +71,25 @@
 
 <script>
 import xpnGrid from './components/xpn-grid.vue';
+import xpnDesign from './components/xpn-design.vue';
 
 export default {
   name: 'app',
-  components: { xpnGrid },
+  components: {
+  'xpn-grid':xpnGrid,
+  'xpn-design':xpnDesign },
 
   data () {
     return {
-      tabledata: [],
-      problem: 'Problem',
-      version: 'V01',
-      author: 'Author',
-      versions: ['V01', 'V02']
+    tabledata: [],
+    problem: 'Problem',
+    version: 'V01',
+    author: 'Author',
+    versions: ['V01', 'V02']
+
     }
   },
+
 
   methods: {
     confirmCancel(ref) {
@@ -84,7 +99,7 @@ export default {
     saveData() {
         this.$bus.emit('saveData');
     },
-      
+
     onClose(type) {
         if(type == 'ok') {
           this.$bus.emit('clearData');
