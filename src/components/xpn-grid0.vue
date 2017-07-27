@@ -5,7 +5,7 @@
             <td v-for="el in row" :class="{
                     a: el.type == 'rules',
                     b: el.type == 'service' || el.type == 'action',
-                    c: el.type == 'obj0' || el.type == 'subject',
+                    c: el.type == 'obj' || el.type == 'subject',
                     d: el.type == 'response' || el.type == 'task' || el.type == 'message' || el.type == 'request',
                 }">
                 <xpn-element0 :el="el"></xpn-element0>
