@@ -1,4 +1,6 @@
-# xpn
+[![codebeat badge](https://codebeat.co/badges/bc27189c-6c12-494d-b1be-f1a8c90f7a1d)](https://codebeat.co/projects/github-com-mjawaids-xpn2vue-master)
+
+# XPN
 
 > Company Concept XPN Project
 
