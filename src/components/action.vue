@@ -1,10 +1,10 @@
 <template>
-    <div>        
+    <div>
         <input class="min-width-small height-20" :placeholder="el.label" v-model="el.value"></input>
 
         <md-button @click.native="fireAddRow" class="btn-style btn-green"><i class="material-icons font-medium">done</i></md-button>
         <md-button @click.native="fireDeleteRow" class="btn-style btn-red"><i class="material-icons font-medium">clear</i></md-button>
-        
+
     </div>
 </template>
 

@@ -5,6 +5,8 @@ Vue.use(bus);
 
 import App from './App.vue'
 
+
+
 let VueMaterial = require('vue-material');
 Vue.use(VueMaterial);
 
