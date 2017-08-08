@@ -1,13 +1,66 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>vuejs-md</title>
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
-    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-  </head>
-  <body>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<head>
+
+<title></title>
+
+</head>
+
+
+<body>
+
+<div id="app" :class="content1">
+<div :class="main">
+
+<div :class="class1">
+    <div :id="d1">
+      <task>Bank-Problem</task>
+    </div>
+    <div :id="d2">
+      <task>-V01-</task>
+    </div>
+    <div :id="d3">
+      <task>Monthly Cost Action Details</task>
+    </div>
+
+<!--<h3 :class="content1" v-for="title in titles">{{ title }}</h3>-->
+</div>
+
+<div :class="class2">
+<p :id="p1">
+<button :class="btn1"></button>
+<u>Client </u>, Order = 
+<input type="text" :class= "inclass2"></input> 
+Filter = 
+<input type="text" :class= "inclass2"></input>
+<button :class="btn2"></button>
+<button :class="btn3"></button><br>
+<u :id="p3">Update Client</u>
+<button :class="btn2"></button><br>
+<u :id="p2">
+<button :class="btn1"></button>
+Account </u>, Order = 
+<input type="text" :class= "inclass2"></input> 
+Filter = 
+<input type="text" :class= "inclass2"></input>
+<button :class="btn2"></button>
+<button :class="btn3"></button><br>
+<u :id="p2">Update Account</u>
+<button :class="btn2"></button><br>
+<u>New Object or Message</u><br>
+</p>
+
+</div>
+
+</div>
+</div>
+
+
+<script src="https://unpkg.com/vue@2.4.2/dist/vue.js"></script>
+<script src="index.js"></script>
+ <link rel = "stylesheet" href = "index.css" />
+
+</body>
+
 </html>

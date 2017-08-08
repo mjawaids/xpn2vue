@@ -1,0 +1,113 @@
+
+.main {
+    position: absolute;
+    background-color: #40FFFF;
+    width: 50%;
+    left:25%;
+    border: 3px solid grey;
+    border-radius: 10px;
+   height:58%;
+  }
+
+.myclass1 {
+      width: 97%;
+      margin-left:1%;
+      border: 3px solid grey;
+      border-radius: 10px;
+      background-color: #40FFFF;
+      margin-top: 1%;
+  
+
+    }
+
+.myclass2 {
+      position: absolute;
+      width: 40%; 
+      margin-left:1%;
+      border: 3px solid grey;
+      border-radius: 10px;
+      background-color: #40FFFF;
+      margin-top: 1%; 
+      height:75%;
+   
+}
+
+#d1 {
+  position: absolute;
+  text-align: left;
+  padding-left: 3%;
+}
+
+
+#d2 {
+  position: absolute;
+  text-align: right;
+  padding-left: 42%;
+  color: red;
+}
+
+#d3 {
+
+  padding-left: 60%;
+  
+}
+
+.first {
+ width: 90%; 
+ margin-left: 1%;
+ margin-top: 1%;
+ height:80%;
+}
+
+.box1 {
+  width: 79%;
+  padding-top: 3%;
+  margin-left: 3%;
+  color: blue;
+  font-style: bold;
+}
+
+.mybtn {
+  width: 10px;
+  height: 15px;
+}
+
+.myclass3{
+
+      width: 55%; 
+      margin-left:43%;
+      border: 3px solid grey;
+      border-radius: 10px;
+      background-color: #40FFFF;
+      margin-top: 1%; 
+      height:75%;
+
+}
+
+.second {
+  position: relative;
+ width: 90%; 
+ margin-right: 1%;
+ margin-top: 1%;
+ height:80%;
+}
+
+.left {
+  position: absolute;
+  width:40%;
+  text-align: right;
+  color: grey;
+  font-style: bold;
+}
+
+.right {
+width: 58%;
+margin-left: 45%;
+}
+
+#box2 {
+width:100%;
+margin-top: 6%;
+font-style: bold;
+color: blue;
+}
