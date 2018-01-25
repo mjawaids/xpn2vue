@@ -30,12 +30,12 @@ export default {
     },
 
     created() {
-        let save = this.save;
+        let save = this.saveDataToLocalStorage;
         this.$bus.on('saveData', function () {
             save();
         });
 
-        let clear = this.clear;
+        let clear = this.clearGrid;
         this.$bus.on('clearData', function () {
             clear();
         });
@@ -71,9 +71,11 @@ export default {
         });
 
         this.init();
+        model = this.grid;
     },
 
     methods: {
+
         init() {
             this.grid = this.gridData;
 
@@ -81,12 +83,29 @@ export default {
                 return;
             }
 
-            this.grid = JSON.parse(localStorage.getItem('xpn-data') || '[]');
+            this.grid = this.getDataFromLocalStorage();
 
             if(this.grid.length != 0) {
                 return;
             }
 
+            this.initTopRow();
+
+            this.initMidRow();
+
+            this.initBottomRow();
+        },
+
+        saveDataToLocalStorage() {
+            localStorage.setItem('xpn-data', JSON.stringify(this.grid) );
+            /// TODO: show confirmation notification
+        },
+
+        getDataFromLocalStorage() {
+            return JSON.parse(localStorage.getItem('xpn-data') || '[]');
+        },
+
+        initTopRow() {
             this.grid.push(
                 [
                     {type:'response', value:'?'}, 
@@ -94,7 +113,9 @@ export default {
                     {type:'task', value:'?'}
                 ]
             );
+        },
 
+        initMidRow() {
             this.grid.push(
                 [
                     {type:'obj', label:'New Object', value:''},
@@ -104,7 +125,9 @@ export default {
                     {type:'subject', label:'New Actor', value:''}
                 ]
             );
+        },
 
+        initBottomRow() {
             this.grid.push(
                 [
                     {type:'message', value:'?'},
@@ -114,12 +137,7 @@ export default {
             );
         },
 
-        save() {
-            localStorage.setItem('xpn-data', JSON.stringify(this.grid) );
-            /// TODO: show confirmation notification
-        },
-
-        clear() {
+        clearGrid() {
             for(let i = 0; i < this.grid.length; i++) {
                 this.grid.splice(i, this.grid.length);
             }
@@ -182,61 +200,104 @@ export default {
         createTopRow() {
             let index = this.findMidColOfTopRow();
             let length = this.grid[0].length;
+            
             let numOfResponses = index;
             let numOfTasks = length - index - 1;
 
             let row = [];
 
-            for(let i=0; i<numOfResponses; i++) {
-                let response = {type:'response', value:'?'};
-                row.push(response);
-            }
+            this.addResponsesInRow(row, numOfResponses);
 
-            let service = {type:'service', label:'New Service', value:''};
+            let service = this.createService();
             row.push(service);
 
-            for(let i=0; i<numOfTasks; i++) {
-                let task = {type:'task', value:'?'};
-                row.push(task);
-            }
+            this.addTasksInRow(row, numOfTasks);
 
             return row;
+        },
+
+        addResponsesInRow(row, numOfResponses) {
+            for(let i=0; i<numOfResponses; i++) {
+                row.push( this.createResponse() );
+            }
+        },
+
+        createResponse() {
+            return {type:'response', value:'?'};
+        },
+
+        createService() {
+            return {type:'service', label:'New Service', value:''};
+        },
+
+        addTasksInRow(row, numOfTasks){
+            for(let i=0; i<numOfTasks; i++) {
+                row.push( this.createTask() );
+            }
+        },
+
+        createTask() {
+            return {type:'task', value:'?'};
         },
 
         createBottomRow() {
             let index = this.findMidColOfBottomRow();
             let lastRowIndex = this.grid.length - 1;
             let length = this.grid[lastRowIndex].length;
+            
             let numOfMessages = index;
             let numOfRequests = length - index - 1;
 
             let row = [];
 
-            for(let i=0; i<numOfMessages; i++) {
-                let message = {type:'message', value:'?'};
-                row.push(message);
-            }
+            this.addMessagesInRow(row, numOfMessages);    
 
-            let action = {type:'action', label:'New Action', value:''};
+            let action = this.createAction();
             row.push(action);
 
-            for(let i=0; i<numOfRequests; i++) {
-                let request = {type:'request', value:'?'};
-                row.push(request);
-            }
+            this.addRequestsInRow(row, numOfRequests);
 
             return row;
         },
 
+        addMessagesInRow(row, numOfMessages) {
+            for(let i=0; i<numOfMessages; i++) {
+                row.push( this.createMessage() );
+            }
+        },
+
+        createMessage() {
+            return {type:'message', value:'?'};
+        },
+
+        createAction() {
+            return {type:'action', label:'New Action', value:''};
+        },
+
+        addRequestsInRow(row, numOfRequests) {
+            for(let i=0; i<numOfRequests; i++) {
+                row.push( this.createRequest() );
+            }
+        },
+
+        createRequest() {
+            return {type:'request', value:'?'};
+        },
+
         addRow(atTop) {
             if(atTop) {
-                let row = this.createTopRow();
-                this.grid.unshift( row );
-                
+                this.addRowToTop( this.createTopRow() );
                 return;
             }
 
-            let row = this.createBottomRow();
+            this.addRowToBottom( this.createBottomRow() );
+        },
+
+        addRowToTop( row ) {
+            this.grid.unshift( row );
+        },
+
+        addRowToBottom( row ) {
             this.grid.push( row );
         },
 

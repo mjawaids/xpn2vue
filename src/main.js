@@ -1,9 +1,12 @@
-import Vue from 'vue'
+import Vue from 'vue';
 
 import bus from 'vue-bus';
 Vue.use(bus);
 
-import App from './App.vue'
+import Model from './model.js';
+window.model = new Model();
+
+import App from './App.vue';
 
 let VueMaterial = require('vue-material');
 Vue.use(VueMaterial);
