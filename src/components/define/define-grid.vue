@@ -1,5 +1,5 @@
 <template>
-  <div id="xpn-grid" class="horizontal-scroll">
+  <div id="define-grid" class="horizontal-scroll">
     <table class="table">
         <tr v-for="row in grid">
             <td v-for="el in row" :class="{ 
@@ -8,7 +8,7 @@
                     c: el.type == 'obj' || el.type == 'subject',
                     d: el.type == 'response' || el.type == 'task' || el.type == 'message' || el.type == 'request',
                 }">
-                <xpn-element :el="el"></xpn-element>
+                <define-element :el="el"></define-element>
             </td>
         </tr>
     </table>
@@ -16,12 +16,12 @@
 </template>
 
 <script>
-import xpnElement from './xpn-element.vue';
+import defineElement from './define-element.vue';
 
 export default {
-    name: 'xpn-grid',
+    name: 'define-grid',
     props: { gridData: { type: Array, required: false } },
-    components: { xpnElement },
+    components: { defineElement },
 
     data () {
         return {

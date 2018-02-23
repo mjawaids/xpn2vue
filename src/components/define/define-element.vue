@@ -16,7 +16,7 @@ import action from './action.vue';
 import request from './request.vue';
 
 export default {
-    name: 'xpn-element',
+    name: 'define-element',
     props: ['el'],
     components: {
         response,

@@ -15,7 +15,7 @@
             <md-tab id="define" md-label="Define" md-active>
                 
                 <xpn-bar @barupdated='updateBar'></xpn-bar>
-                <xpn-grid :grid-data="tabledata"></xpn-grid>
+                <define-grid :grid-data="tabledata"></define-grid>
 
             </md-tab>
 
@@ -51,11 +51,11 @@
 
 <script>
 import xpnBar from './components/xpn-bar.vue';
-import xpnGrid from './components/xpn-grid.vue';
+import defineGrid from './components/define/define-grid.vue';
 
 export default {
   name: 'app',
-  components: { xpnBar, xpnGrid },
+  components: { xpnBar, defineGrid },
 
   data () {
     return {
