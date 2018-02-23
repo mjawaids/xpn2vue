@@ -23,8 +23,7 @@
 
             <md-tab id="design" md-label="Design">
                 
-                <xpn-bar @barupdated='updateBar'></xpn-bar>           
-                <xpn-design></xpn-design>
+                <xpn-bar @barupdated='updateBar'></xpn-bar>
 
             </md-tab>
 
@@ -53,11 +52,10 @@
 <script>
 import xpnBar from './components/xpn-bar.vue';
 import xpnGrid from './components/xpn-grid.vue';
-import xpnDesign from './components/xpn-design.vue';
 
 export default {
   name: 'app',
-  components: { xpnBar, xpnGrid, xpnDesign },
+  components: { xpnBar, xpnGrid },
 
   data () {
     return {
