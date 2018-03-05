@@ -1,28 +1,13 @@
 <template>
     <div class="vertical">
-
-        <input class="min-width-small height-20" :placeholder="el.label" v-model="el.value">
-        
-        <md-button @click.native="fireAddCol" class="btn-style btn-green"><i class="material-icons font-medium">done</i></md-button>
-        <md-button @click.native="fireDeleteCol" class="btn-style btn-red"><i class="material-icons font-medium">clear</i></md-button>
-        
+        <input class="min-width-small height-20" :placeholder="el.label" v-model="el.value" readonly>
     </div>
 </template>
 
 <script>
 export default {
     name: 'obj',
-    props: ['el'],
-
-    methods: {
-        fireAddCol() {
-            this.$bus.emit('addCol', true);
-        },
-
-        fireDeleteCol() {
-            this.$bus.emit('deleteCol', this.el);
-        }
-    }
+    props: ['el']
 }
 </script>
 

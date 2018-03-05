@@ -2,11 +2,11 @@
     <md-layout class="bar">    
 
         <md-layout md-flex-offset="20">
-            <input class="align-right width-med font-xlarge" v-model="data.problem" @change="update" maxlength="30"></input>
+            <input class="align-right width-med font-xlarge" v-model="problem" maxlength="30">
             <span class="font-xlarge">&nbsp;_</span>
-            <input class="align-center width-small font-xlarge" v-model="data.version" @change="update" maxlength="5"></input>
+            <input class="align-center width-small font-xlarge" v-model="version" maxlength="5">
             <span class="font-xlarge">_&nbsp;</span>
-            <input class="width-med font-xlarge" v-model="data.author" @change="update" maxlength="30"></input>
+            <input class="width-med font-xlarge" v-model="author" maxlength="30">
         </md-layout>
 
         <md-layout md-flex="15" class="align-right">
@@ -21,21 +21,40 @@
 export default {
     name: 'xpn-bar',
 
-    data() {
-        return {
-            data: {
-                problem: 'Problem',
-                version: 'V01',
-                author: 'Author'
+    computed: {
+        
+        problem: {
+            get () {
+                return this.$store.state.problem;
+            },
+            set (value) {
+                this.$store.commit('updateProblem', value);
+            }
+        },
+
+        version: {
+            get () {
+                return this.$store.state.version;
+            },
+            set (value) {
+                this.$store.commit('updateVersion', value);
+            }
+        },
+
+        author: {
+            get () {
+                return this.$store.state.author;
+            },
+            set (value) {
+                this.$store.commit('updateAuthor', value);
             }
         }
     },
 
-    methods: {
-        update() {
-            console.log(model);
-            this.$emit('barupdated', this.data);
-        }
+    created: function() {
+        this.$store.commit('updateProblem', 'Problem');
+        this.$store.commit('updateVersion', 'V01');
+        this.$store.commit('updateAuthor', 'Author');
     }
 }
 </script>

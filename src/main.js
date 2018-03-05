@@ -1,10 +1,12 @@
 import Vue from 'vue';
 
+import Vuex from 'vuex';
+Vue.use(Vuex);
+
+import store from './store';
+
 import bus from 'vue-bus';
 Vue.use(bus);
-
-import Model from './model.js';
-window.model = new Model();
 
 import App from './App.vue';
 
@@ -28,5 +30,7 @@ Vue.material.registerTheme({
 
 new Vue({
   el: '#app',
+  store: new Vuex.Store(store),
+  // Model,
   render: h => h(App)
 })

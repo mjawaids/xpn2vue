@@ -1,6 +1,6 @@
 <template>
     <md-layout class="e">
-        <rule v-for="(rul, index) in el.value" :el="rul" :key="index"></rule>
+        <rule v-for="rul in el.value" :el="rul" :key="rul"></rule>
     </md-layout>
 </template>
 

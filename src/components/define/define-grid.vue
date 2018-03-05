@@ -2,12 +2,7 @@
   <div id="define-grid" class="horizontal-scroll">
     <table class="table">
         <tr v-for="row in grid">
-            <td v-for="el in row" :class="{ 
-                    a: el.type == 'rules',
-                    b: el.type == 'service' || el.type == 'action',
-                    c: el.type == 'obj' || el.type == 'subject',
-                    d: el.type == 'response' || el.type == 'task' || el.type == 'message' || el.type == 'request',
-                }">
+            <td v-for="el in row" :class="el.type">
                 <define-element :el="el"></define-element>
             </td>
         </tr>
@@ -20,22 +15,17 @@ import defineElement from './define-element.vue';
 
 export default {
     name: 'define-grid',
-    props: { gridData: { type: Array, required: false } },
     components: { defineElement },
 
-    data () {
-        return {
-            grid: []
+    computed: {
+        grid() {
+            return this.$store.state.data;
         }
     },
 
     created() {
-        let save = this.saveDataToLocalStorage;
-        this.$bus.on('saveData', function () {
-            save();
-        });
 
-        let clear = this.clearGrid;
+        let clear = this.resetGrid;
         this.$bus.on('clearData', function () {
             clear();
         });
@@ -71,75 +61,24 @@ export default {
         });
 
         this.init();
-        model = this.grid;
     },
 
     methods: {
 
         init() {
-            this.grid = this.gridData;
 
-            if(this.grid.length != 0) {
+            if(this.$store.state.data.length != 0) {
                 return;
             }
 
-            this.grid = this.getDataFromLocalStorage();
-
-            if(this.grid.length != 0) {
-                return;
-            }
-
-            this.initTopRow();
-
-            this.initMidRow();
-
-            this.initBottomRow();
+            this.$store.commit('addTopRow');
+            this.$store.commit('addMidRow');
+            this.$store.commit('addBottomRow');
         },
 
-        saveDataToLocalStorage() {
-            localStorage.setItem('xpn-data', JSON.stringify(this.grid) );
-            /// TODO: show confirmation notification
-        },
-
-        getDataFromLocalStorage() {
-            return JSON.parse(localStorage.getItem('xpn-data') || '[]');
-        },
-
-        initTopRow() {
-            this.grid.push(
-                [
-                    {type:'response', value:'?'}, 
-                    {type:'service', label:'New Service', value:''}, 
-                    {type:'task', value:'?'}
-                ]
-            );
-        },
-
-        initMidRow() {
-            this.grid.push(
-                [
-                    {type:'obj', label:'New Object', value:''},
-                    {type:'rules', value:[
-                        {type:'rule', label:'New Rule', value:''}
-                    ]},
-                    {type:'subject', label:'New Actor', value:''}
-                ]
-            );
-        },
-
-        initBottomRow() {
-            this.grid.push(
-                [
-                    {type:'message', value:'?'},
-                    {type:'action', label:'New Action', value:''},
-                    {type:'request', value:'?'}
-                ]
-            );
-        },
-
-        clearGrid() {
-            for(let i = 0; i < this.grid.length; i++) {
-                this.grid.splice(i, this.grid.length);
+        resetGrid() {
+            for(let i = 0; i < this.$store.state.data.length; i++) {
+                this.$store.state.data.splice(i, this.$store.state.data.length);
             }
 
             this.init();
@@ -148,42 +87,42 @@ export default {
         findMidColofMidRow() {
             let midRowIndex = this.findMidRow();
 
-            for(let i = 0; i<this.grid[midRowIndex].length; i++) {
-                if(this.grid[midRowIndex][i].type == 'rules') {
+            for(let i = 0; i<this.$store.state.data[midRowIndex].length; i++) {
+                if(this.$store.state.data[midRowIndex][i].type == 'rules') {
                     return i;
                 }
             }
         },
 
         findMidColOfTopRow() {
-            for(let i = 0; i<this.grid[0].length; i++) {
-                if(this.grid[0][i].type == 'service') {
+            for(let i = 0; i<this.$store.state.data[0].length; i++) {
+                if(this.$store.state.data[0][i].type == 'service') {
                     return i;
                 }
             }
         },
 
         findMidColOfBottomRow() {
-            let index = this.grid.length - 1;
-            for(let i = 0; i<this.grid[index].length; i++) {
-                if(this.grid[index][i].type == 'action') {
+            let index = this.$store.state.data.length - 1;
+            for(let i = 0; i<this.$store.state.data[index].length; i++) {
+                if(this.$store.state.data[index][i].type == 'action') {
                     return i;
                 }
             }
         },
 
         findMidRow() {
-            for(let i = 0; i<this.grid.length; i++) {
-                if(this.grid[i][0].type == 'obj') {
+            for(let i = 0; i<this.$store.state.data.length; i++) {
+                if(this.$store.state.data[i][0].type == 'obj') {
                     return i;
                 }
             }
         },
 
         findCol(obj) {
-            for(let i = 0; i<this.grid.length; i++) {
-                for(let j = 0; j<this.grid[i].length; j++) {
-                    if(this.grid[i][j] == obj) {
+            for(let i = 0; i<this.$store.state.data.length; i++) {
+                for(let j = 0; j<this.$store.state.data[i].length; j++) {
+                    if(this.$store.state.data[i][j] == obj) {
                         return j;
                     }
                 }
@@ -194,12 +133,12 @@ export default {
             let midRowIndex = this.findMidRow();
             let midColIndex = this.findMidColofMidRow();
             
-            return this.grid[midRowIndex][midColIndex].value;
+            return this.$store.state.data[midRowIndex][midColIndex].value;
         },
 
         createTopRow() {
             let index = this.findMidColOfTopRow();
-            let length = this.grid[0].length;
+            let length = this.$store.state.data[0].length;
             
             let numOfResponses = index;
             let numOfTasks = length - index - 1;
@@ -242,8 +181,8 @@ export default {
 
         createBottomRow() {
             let index = this.findMidColOfBottomRow();
-            let lastRowIndex = this.grid.length - 1;
-            let length = this.grid[lastRowIndex].length;
+            let lastRowIndex = this.$store.state.data.length - 1;
+            let length = this.$store.state.data[lastRowIndex].length;
             
             let numOfMessages = index;
             let numOfRequests = length - index - 1;
@@ -294,19 +233,19 @@ export default {
         },
 
         addRowToTop( row ) {
-            this.grid.unshift( row );
+            this.$store.state.data.unshift( row );
         },
 
         addRowToBottom( row ) {
-            this.grid.push( row );
+            this.$store.state.data.push( row );
         },
 
         deleteRow(obj) {
             let foundRow = false;
             
-            for(let i = 0; i<this.grid.length; i++) {
-                for(let j = 0; j<this.grid[i].length; j++) {
-                    if(this.grid[i][j] == obj) {
+            for(let i = 0; i<this.$store.state.data.length; i++) {
+                for(let j = 0; j<this.$store.state.data[i].length; j++) {
+                    if(this.$store.state.data[i][j] == obj) {
                         foundRow = true;
                         break;
                     }
@@ -321,12 +260,12 @@ export default {
                         break;
                     }
 
-                    if(i > midRowIndex && midRowIndex == this.grid.length-2) {
+                    if(i > midRowIndex && midRowIndex == this.$store.state.data.length-2) {
                         // cannot delete action row. min 1 required
                         break;
                     }
 
-                    this.grid.splice(i, 1);
+                    this.$store.state.data.splice(i, 1);
                     break;
                 }
             }
@@ -365,19 +304,19 @@ export default {
         },
 
         addCol(atLeft = true) {
-            let rowLength = this.grid[0].length;
+            let rowLength = this.$store.state.data[0].length;
             let colIndex = atLeft ? 0 : rowLength - 1;
                 
-            for(let i = 0; i<this.grid.length; i++) {
-                let el = this.grid[i][colIndex];
+            for(let i = 0; i<this.$store.state.data.length; i++) {
+                let el = this.$store.state.data[i][colIndex];
                 let newEl = this.createElementOfType(el.type);
                 
                 if(atLeft) {
-                    this.grid[i].unshift(newEl);
+                    this.$store.state.data[i].unshift(newEl);
                     continue;
                 }
                 
-                this.grid[i].push(newEl);
+                this.$store.state.data[i].push(newEl);
             }
         },
 
@@ -390,13 +329,13 @@ export default {
                 return;
             }
 
-            if(foundColIndex > midColIndex && midColIndex == this.grid[0].length-2) {
+            if(foundColIndex > midColIndex && midColIndex == this.$store.state.data[0].length-2) {
                 return;
             }
             
             // delete the col
-            for(let i = 0; i<this.grid.length; i++) {
-                this.grid[i].splice(foundColIndex, 1);
+            for(let i = 0; i<this.$store.state.data.length; i++) {
+                this.$store.state.data[i].splice(foundColIndex, 1);
             }
         },
 
@@ -405,7 +344,7 @@ export default {
             let midColIndex = this.findMidColofMidRow();
             
             let newRule = {type:'rule', label:'New Rule', value:''};
-            this.grid[midRowIndex][midColIndex].value.push( newRule );
+            this.$store.state.data[midRowIndex][midColIndex].value.push( newRule );
         },
 
         deleteRule(rule) {
@@ -442,23 +381,23 @@ td {
     overflow-y: hidden;
 }
 
-.a {
+.rules {
   width:230px;
   height:214px
 }
 
-.b {
+.service, .action {
   width: 214px;
   height: 20px;
 }
 
-.c {
+.obj, .subject {
   width: 20px;
   height: 214px;
   vertical-align: top;
 }
 
-.d {
+.response, .task, .message, .request {
   width: 20px;
   height: 20px;
 }

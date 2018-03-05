@@ -14,8 +14,8 @@
 
             <md-tab id="define" md-label="Define" md-active>
                 
-                <xpn-bar @barupdated='updateBar'></xpn-bar>
-                <define-grid :grid-data="tabledata"></define-grid>
+                <xpn-bar></xpn-bar>
+                <define-grid></define-grid>
 
             </md-tab>
 
@@ -23,7 +23,8 @@
 
             <md-tab id="design" md-label="Design">
                 
-                <xpn-bar @barupdated='updateBar'></xpn-bar>
+                <xpn-bar></xpn-bar>
+                <design-grid></design-grid>
 
             </md-tab>
 
@@ -52,32 +53,11 @@
 <script>
 import xpnBar from './components/xpn-bar.vue';
 import defineGrid from './components/define/define-grid.vue';
+import designGrid from './components/design/design-grid.vue';
 
 export default {
-  name: 'app',
-  components: { xpnBar, defineGrid },
-
-  data () {
-    return {
-      tabledata: []
-    }
-  },
-
-  methods: {
-    confirmCancel(ref) {
-        this.$refs[ref].open();
-    },
-
-    saveData() {
-        this.$bus.emit('saveData');
-    },
-
-    updateBar(data) {
-        model.problem = data.problem;
-        model.version = data.version;
-        model.author = data.author;
-    }
-  }
+    name: 'app',
+    components: { xpnBar, defineGrid, designGrid }
 }
 </script>
 
