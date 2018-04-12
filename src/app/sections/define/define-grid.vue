@@ -1,9 +1,9 @@
 <template>
   <div id="define-grid" class="horizontal-scroll">
     <table class="table">
-        <tr v-for="row in grid">
-            <td v-for="el in row" :class="el.type">
-                <define-element :el="el"></define-element>
+        <tr v-for="(row,i) in grid" :key="i">
+            <td v-for="(el,j) in row" :class="el.type" :key="j">
+                <define-element :el="el" :mode="'define'" :i="i" :j="j"></define-element>
             </td>
         </tr>
     </table>

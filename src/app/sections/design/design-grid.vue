@@ -1,9 +1,9 @@
 <template>
   <div id="design-grid" class="horizontal-scroll">
     <table class="table">
-        <tr v-for="row in grid">
-            <td v-for="el in row" :class="el.type">
-                <design-element :el="el"></design-element>
+        <tr v-for="(row, i) in grid" :key="i">
+            <td v-for="(el, j) in row" :class="el.type" :key="j">
+              <design-element :el="el" :mode="'design'"></design-element>
             </td>
         </tr>
     </table>
