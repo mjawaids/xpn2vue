@@ -1,17 +1,26 @@
 <template>
-    <div class="corner-style">
+<div>
+    <div v-if="mode === 'define'" class="corner-style">
+        <md-select name="response" v-model="el.value" class="md-select-value corner-style">
+            <md-option value="datastore">Datastore</md-option>
+            <md-option value="report">Report</md-option>
+            <md-option value="?">?</md-option>
+        </md-select>
+    </div>
+    <div v-if="mode === 'design'" class="corner-style">
         <md-select name="response" v-model="el.value" class="md-select-value corner-style" disabled>
             <md-option value="datastore">Datastore</md-option>
             <md-option value="report">Report</md-option>
             <md-option value="?">?</md-option>
         </md-select>
     </div>
+</div>
 </template>
 
 <script>
 export default {
     name: 'response',
-    props: ['el']
+    props: ['el', 'mode']
 }
 </script>
 

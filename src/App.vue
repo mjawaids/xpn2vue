@@ -51,9 +51,9 @@
 </template>
 
 <script>
-import xpnBar from './components/xpn-bar.vue';
-import defineGrid from './components/define/define-grid.vue';
-import designGrid from './components/design/design-grid.vue';
+import xpnBar from './app/components/xpn-bar.vue';
+import defineGrid from './app/sections/define/define-grid.vue';
+import designGrid from './app/sections/design/design-grid.vue';
 
 export default {
     name: 'app',
