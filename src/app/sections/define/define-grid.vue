@@ -220,7 +220,24 @@ export default {
         },
 
         createRequest() {
-            return {type:'request', value:'?'};
+            return {
+                type:'request', 
+                value:'?', 
+                form: {
+                    preCondition: [],
+                    fields: [{
+                        label: 'New Field',
+                        type: 'Input (Outpus, Search, Lookup)',
+                        component: 'text',
+                        value: '',
+                        rule: '',
+                        mask: '',
+                        H: '',
+                        W: ''
+                    }],
+                    postCondition: []
+                }
+            };
         },
 
         addRow(atTop) {
