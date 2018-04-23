@@ -3,7 +3,7 @@
     <table class="table">
         <tr v-for="(row, i) in grid" :key="i">
             <td v-for="(el, j) in row" :class="el.type" :key="j">
-              <design-element :el="el" :mode="'design'"></design-element>
+              <design-element :el="el" :mode="'design'" :i="i" :j="j"></design-element>
             </td>
         </tr>
     </table>
@@ -20,6 +20,27 @@ export default {
     computed: {
         grid() {
             return this.$store.state.data;
+        }
+    },
+    created() {
+
+        let addReqFormField = this.addReqFormField;
+        this.$bus.on('addReqFormField', function (formIndex) {
+            addReqFormField(formIndex);
+        });
+
+        let deleteReqFormField = this.deleteReqFormField;
+        this.$bus.on('deleteReqFormField', function (formIndex, fieldIndex) {
+            deleteReqFormField(formIndex, fieldIndex);
+        });
+
+    },
+    methods: {
+        addReqFormField(formIndex){
+            this.$store.commit('addFieldToRequestForm', formIndex);
+        },
+        deleteReqFormField(formIndex, fieldIndex){
+            this.$store.commit('deleteFieldFromRequestForm', formIndex, fieldIndex);
         }
     }
 }

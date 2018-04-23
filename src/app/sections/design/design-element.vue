@@ -1,5 +1,5 @@
 <template>
-    <component :el="el" :mode="mode" v-bind:is="el.type" >
+    <component :el="el" :mode="mode" :i="i" :j="j" v-bind:is="el.type" >
         <!-- component changes when vm.el.type changes! -->
     </component>
 </template>
@@ -17,7 +17,7 @@ import request from '../../components/request.vue';
 
 export default {
     name: 'design-element',
-    props: ['el', 'mode'],
+    props: ['el', 'mode', 'i', 'j'],
     components: {
         response,
         service,
