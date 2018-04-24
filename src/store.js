@@ -21,7 +21,7 @@ export default {
       obj: {type:'obj', label:'New Object', value:''},
       /** RULES */
         rules: {type:'rules', value:[
-            {type:'rule', label:'New Rule', value:''}
+            {type:'rule', label:'New Rule', rule:'' }
         ]},
       /** SUBJECT */
       subject: {type:'subject', label:'New Actor', value:''},
@@ -29,7 +29,21 @@ export default {
       /**     BOTTOM ROWS     */
 
       /** MESSAGE */
-      message: {type:'message', value:'?'},
+      message: {
+        type: 'message',
+        value: '?',
+        message: {
+          socialSecurityNumber: '',
+          name: '',
+          address: '',
+          zipcode: '',
+          place: '',
+          dateOfBirth: '',
+          gender: 'Uppercase(Gender)',
+          contract: '',
+          signature: ''
+        }
+      },
       /** ACTION */
       action: {type:'action', label:'New Action', value:''},
       /** REQUEST */

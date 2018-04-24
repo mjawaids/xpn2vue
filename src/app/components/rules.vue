@@ -1,6 +1,6 @@
 <template>
     <md-layout class="e">
-        <rule v-for="(rul, index) in el.value" :el="rul" :mode="mode" :key="index"></rule>
+        <rule v-for="(rul, index) in el.value" :el="rul" :mode="mode" :i="i" :j="j" :key="index"></rule>
     </md-layout>
 </template>
 
@@ -9,7 +9,7 @@ import rule from './rule.vue';
 
 export default {
     name: 'rules',
-    props: ['el', 'mode'],
+    props: ['el', 'mode', 'i', 'j'],
     components: { rule }
 }
 </script>
