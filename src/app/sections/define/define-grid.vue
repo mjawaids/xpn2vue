@@ -206,7 +206,21 @@ export default {
         },
 
         createMessage() {
-            return {type:'message', value:'?'};
+            return {
+                type:'message', 
+                value:'?',
+                message: {
+                    socialSecurityNumber: '',
+                    name: '',
+                    address: '',
+                    zipcode: '',
+                    place: '',
+                    dateOfBirth: '',
+                    gender: 'Uppercase(Gender)',
+                    contract: '',
+                    signature: ''
+                    }
+                };
         },
 
         createAction() {
@@ -360,7 +374,7 @@ export default {
             let midRowIndex = this.findMidRow();
             let midColIndex = this.findMidColofMidRow();
             
-            let newRule = {type:'rule', label:'New Rule', value:''};
+            let newRule = {type:'rule', label:'New Rule', rule:''};
             this.$store.state.data[midRowIndex][midColIndex].value.push( newRule );
         },
 

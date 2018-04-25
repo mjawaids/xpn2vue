@@ -13,7 +13,8 @@
             <md-option value="?" selected>?</md-option>
         </md-select>
         <md-dialog v-if="el.value === 'form'" :ref="`dialog-${i}${j}`">
-            <md-dialog-content>
+            <md-dialog-title class="text-center">Open Account Form Details</md-dialog-title>
+            <md-dialog-content class="modal-grid">
                     <div class="column">
                         <md-list class="md-dense">
                         <md-list-item>
@@ -126,7 +127,6 @@ export default {
         },
         saveAndCloseDialog(ref) {
             this.closeDialog(ref);
-            this.el.value = this.value;
         },
         setFieldIndex(fieldIndex){
             this.fieldInd = fieldIndex;
@@ -148,14 +148,14 @@ export default {
     min-width:20px;
 }
 
-.md-dialog-content {
+.modal-grid {
     display: grid;
     grid-column-gap: 10px;
     grid-template-columns: 200px 400px;
     height: 400px;
 }
 
-.md-dialog-content .column {
+.modal-grid .column {
     border: solid 1px grey;
     border-radius: 5px; 
     padding: 5px;

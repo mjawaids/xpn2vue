@@ -1,7 +1,7 @@
 <template>
 <div>
     <div v-if="mode === 'define'">        
-        <input class="min-width-small height-20" :placeholder="el.label" v-model="el.value">
+        <input class="min-width-small height-20" :placeholder="el.label" v-model="el.label">
 
         <md-button @click.native="fireAddRule" class="btn-style btn-green"><i class="material-icons font-medium">done</i></md-button>
         <md-button @click.native="fireDeleteRule" class="btn-style btn-red"><i class="material-icons font-medium">clear</i></md-button>
@@ -10,10 +10,18 @@
     <div v-if="mode === 'design'">        
         <input @click="openDialog(`dialog-${i}${j}`)" class="min-width-small height-20" :placeholder="el.label" v-model="el.value" readonly>
         <md-dialog :ref="`dialog-${i}${j}`">
-            <md-dialog-content>
-                <md-input-container>
-                    <md-input @keyup.enter.native="saveAndCloseDialog(`dialog-${i}${j}`)" v-model="value"></md-input>
-                </md-input-container>
+            <md-dialog-title class="text-center">Rule Details</md-dialog-title>
+            <md-dialog-content class="big-modal">
+                <div>
+                    <md-input-container>
+                        <label>Rule Name</label>
+                        <md-input v-model="el.label"></md-input>
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Rule</label>
+                        <md-input v-model="el.rule"></md-input>
+                    </md-input-container>
+                </div>
             </md-dialog-content>
 
             <md-dialog-actions>
@@ -29,9 +37,6 @@
 export default {
     name: 'rule',
     props: ['el', 'mode', 'i', 'j'],
-    data: () => ({
-        value: ''
-    }),
     methods: {
         fireAddRule() {
             this.$bus.emit('addRule');
@@ -49,7 +54,6 @@ export default {
         },
         saveAndCloseDialog(ref) {
             this.closeDialog(ref);
-            this.el.value = this.value;
         }
     }
 }
