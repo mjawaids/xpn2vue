@@ -34,6 +34,16 @@ export default {
             deleteReqFormField(formIndex, fieldIndex);
         });
 
+        let addMessageAttribute = this.addMessageAttribute;
+        this.$bus.on('addMessageAttribute', function (formIndex) {
+            addMessageAttribute(formIndex);
+        });
+
+        let deleteMessageAttribute = this.deleteMessageAttribute;
+        this.$bus.on('deleteMessageAttribute', function (formIndex, attrIndex) {
+            deleteMessageAttribute(formIndex, attrIndex);
+        });
+
     },
     methods: {
         addReqFormField(formIndex){
@@ -41,6 +51,12 @@ export default {
         },
         deleteReqFormField(formIndex, fieldIndex){
             this.$store.commit('deleteFieldFromRequestForm', formIndex, fieldIndex);
+        },
+        addMessageAttribute(rowIndex){
+            this.$store.commit('addAttributeToMessage', rowIndex);
+        },
+        deleteMessageAttribute(rowIndex, attrIndex){
+            this.$store.commit('deleteAttributeFromMessage', rowIndex, attrIndex);
         }
     }
 }

@@ -32,17 +32,9 @@ export default {
       message: {
         type: 'message',
         value: '?',
-        message: {
-          socialSecurityNumber: '',
-          name: '',
-          address: '',
-          zipcode: '',
-          place: '',
-          dateOfBirth: '',
-          gender: 'Uppercase(Gender)',
-          contract: '',
-          signature: ''
-        }
+        attribute: [
+          {title: '', value: ''}
+        ]
       },
       /** ACTION */
       action: {type:'action', label:'New Action', value:''},
@@ -120,6 +112,17 @@ export default {
     },
     deleteFieldFromRequestForm(state, formIndex, fieldIndex) {
       state.data[formIndex][2].form.fields.splice(fieldIndex, 1);
+    },
+
+    addAttributeToMessage(state, rowIndex) {
+      state.data[rowIndex][0].attribute.push({
+        title: "",
+        value: ""
+      });
+    },
+
+    deleteAttributeFromMessage(state, rowIndex, attrIndex) {
+      state.data[rowIndex][0].attribute.splice(attrIndex, 1);
     },
 
     updateData(state, value) {

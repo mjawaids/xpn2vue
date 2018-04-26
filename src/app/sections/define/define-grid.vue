@@ -209,18 +209,8 @@ export default {
             return {
                 type:'message', 
                 value:'?',
-                message: {
-                    socialSecurityNumber: '',
-                    name: '',
-                    address: '',
-                    zipcode: '',
-                    place: '',
-                    dateOfBirth: '',
-                    gender: 'Uppercase(Gender)',
-                    contract: '',
-                    signature: ''
-                    }
-                };
+                attribute: [{title: "", value: ""}]
+            };
         },
 
         createAction() {

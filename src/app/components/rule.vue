@@ -8,27 +8,7 @@
         
     </div>
     <div v-if="mode === 'design'">        
-        <input @click="openDialog(`dialog-${i}${j}`)" class="min-width-small height-20" :placeholder="el.label" v-model="el.value" readonly>
-        <md-dialog :ref="`dialog-${i}${j}`">
-            <md-dialog-title class="text-center">Rule Details</md-dialog-title>
-            <md-dialog-content class="big-modal">
-                <div>
-                    <md-input-container>
-                        <label>Rule Name</label>
-                        <md-input v-model="el.label"></md-input>
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Rule</label>
-                        <md-input v-model="el.rule"></md-input>
-                    </md-input-container>
-                </div>
-            </md-dialog-content>
-
-            <md-dialog-actions>
-                <md-button class="md-primary" @click="closeDialog(`dialog-${i}${j}`)">close</md-button>
-                <md-button class="md-primary" @click="saveAndCloseDialog(`dialog-${i}${j}`)">save</md-button>
-            </md-dialog-actions>
-        </md-dialog>
+        <input class="min-width-small height-20" :placeholder="el.label" v-model="el.value" readonly>
     </div>
 </div>
 </template>
@@ -44,16 +24,6 @@ export default {
 
         fireDeleteRule() {
             this.$bus.emit('deleteRule', this.el);
-        },
-        openDialog(ref) {
-            this.$refs[ref].open();
-            this.value = this.el.value;
-        },
-        closeDialog(ref) {
-            this.$refs[ref].close();
-        },
-        saveAndCloseDialog(ref) {
-            this.closeDialog(ref);
         }
     }
 }

@@ -18,12 +18,34 @@
         <md-dialog v-if="el.value !== '?' && el.value" :ref="`dialog-${i}${j}`">
             <md-dialog-title class="text-center">Create Client Message Details</md-dialog-title>
             <md-dialog-content class="big-modal">
-                <div>
-                    <md-input-container v-for="(key, keyInd) in messageKeys" :key="keyInd">
-                        <label>{{key}}</label>
-                        <md-input v-model="el.message[key]"></md-input>
-                    </md-input-container>
-                </div>
+                <md-table>
+                    <md-table-header>
+                        <md-table-row>
+                            <md-table-head>Attribute</md-table-head>
+                            <md-table-head>Value</md-table-head>
+                        </md-table-row>
+                    </md-table-header>
+
+                    <md-table-body>
+                        <md-table-row v-for="(key, attrIndex) in el.attribute" :key="attrIndex">
+                            <md-table-cell class="table-attribute">
+                                <md-input-container class="condensed-input">
+                                    <md-input v-model="key.title"></md-input>
+                                </md-input-container>
+                            </md-table-cell>
+                            <md-table-cell>
+                                <md-input-container class="condensed-input">
+                                    <md-input v-model="key.value"></md-input>
+                                </md-input-container>
+                                <md-button class="md-icon-button" @click="fireDeleteAttribute(i, attrIndex)">
+                                    <md-icon>delete</md-icon>
+                                </md-button>
+                            </md-table-cell>
+                        </md-table-row>
+                    </md-table-body>
+                </md-table>
+                <md-button class="md-raised md-primary md-dense" @click="fireAddAttribute(i)">Add Attribute</md-button>
+
             </md-dialog-content>
 
             <md-dialog-actions>
@@ -40,6 +62,13 @@ export default {
     name: 'message',
     props: ['el', 'mode', 'i', 'j'],
     methods: {
+        fireAddAttribute(rowIndex) {
+            this.$bus.emit('addMessageAttribute', rowIndex);
+        },
+
+        fireDeleteAttribute(rowIndex, attrIndex) {
+            this.$bus.emit('deleteMessageAttribute', rowIndex, attrIndex);
+        },
         openDialog(ref, value) {
             if(value !== '?' && value){
                 this.$refs[ref].open();
@@ -53,11 +82,6 @@ export default {
         },
         setFieldIndex(fieldIndex){
             this.fieldInd = fieldIndex;
-        }
-    },
-    computed: {
-        messageKeys() {
-            return Object.keys(this.el.message);
         }
     }
 }
@@ -86,6 +110,16 @@ export default {
 
 label {
     text-transform: capitalize;
+}
+
+.table-attribute {
+    width: 250px;
+}
+
+.condensed-input {
+    margin: 0;
+    padding: 0;
+    min-height: auto !important;
 }
 
 </style>
