@@ -98,31 +98,32 @@ export default {
             ]
         );
     },
-    addFieldToRequestForm(state, formIndex) {
-      state.data[formIndex][2].form.fields.push({
-        label: 'New Field',
-        type: 'Input (Outpus, Search, Lookup)',
-        component: 'text',
-        value: '',
-        rule: '',
-        mask: '',
-        H: '',
-        W: ''
+    addFieldToRequestForm(state, indices) {
+      state.data[indices.i][indices.j].form.fields.push({
+        label: "New Field",
+        type: "Input (Outpus, Search, Lookup)",
+        component: "text",
+        value: "",
+        rule: "",
+        mask: "",
+        H: "",
+        W: ""
       });
     },
-    deleteFieldFromRequestForm(state, formIndex, fieldIndex) {
-      state.data[formIndex][2].form.fields.splice(fieldIndex, 1);
+    deleteFieldFromRequestForm(state, indices) {
+      state.data[indices.i][indices.j].form.fields.splice(indices.fieldIndex, 1);
     },
 
-    addAttributeToMessage(state, rowIndex) {
-      state.data[rowIndex][0].attribute.push({
+    addAttributeToMessage(state, indices) {
+      console.log(indices, state.data[indices.i][indices.j]);
+      state.data[indices.i][indices.j].attribute.push({
         title: "",
         value: ""
       });
     },
 
-    deleteAttributeFromMessage(state, rowIndex, attrIndex) {
-      state.data[rowIndex][0].attribute.splice(attrIndex, 1);
+    deleteAttributeFromMessage(state, indices) {
+      state.data[indices.i][indices.j].attribute.splice(indices.attrIndex, 1);
     },
 
     updateData(state, value) {

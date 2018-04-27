@@ -37,14 +37,14 @@
                                 <md-input-container class="condensed-input">
                                     <md-input v-model="key.value"></md-input>
                                 </md-input-container>
-                                <md-button class="md-icon-button" @click="fireDeleteAttribute(i, attrIndex)">
+                                <md-button class="md-icon-button" @click="fireDeleteAttribute({i, j, attrIndex})">
                                     <md-icon>delete</md-icon>
                                 </md-button>
                             </md-table-cell>
                         </md-table-row>
                     </md-table-body>
                 </md-table>
-                <md-button class="md-raised md-primary md-dense" @click="fireAddAttribute(i)">Add Attribute</md-button>
+                <md-button class="md-raised md-primary md-dense" @click="fireAddAttribute({i, j})">Add Attribute</md-button>
 
             </md-dialog-content>
 
@@ -62,12 +62,12 @@ export default {
     name: 'message',
     props: ['el', 'mode', 'i', 'j'],
     methods: {
-        fireAddAttribute(rowIndex) {
-            this.$bus.emit('addMessageAttribute', rowIndex);
+        fireAddAttribute(indices) {
+            this.$bus.emit('addMessageAttribute', indices);
         },
 
-        fireDeleteAttribute(rowIndex, attrIndex) {
-            this.$bus.emit('deleteMessageAttribute', rowIndex, attrIndex);
+        fireDeleteAttribute(indices) {
+            this.$bus.emit('deleteMessageAttribute', indices);
         },
         openDialog(ref, value) {
             if(value !== '?' && value){

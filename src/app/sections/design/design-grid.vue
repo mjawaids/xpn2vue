@@ -25,38 +25,38 @@ export default {
     created() {
 
         let addReqFormField = this.addReqFormField;
-        this.$bus.on('addReqFormField', function (formIndex) {
-            addReqFormField(formIndex);
+        this.$bus.on('addReqFormField', function (indices) {
+            addReqFormField(indices);
         });
 
         let deleteReqFormField = this.deleteReqFormField;
-        this.$bus.on('deleteReqFormField', function (formIndex, fieldIndex) {
-            deleteReqFormField(formIndex, fieldIndex);
+        this.$bus.on('deleteReqFormField', function (indices) {
+            deleteReqFormField(indices);
         });
 
         let addMessageAttribute = this.addMessageAttribute;
-        this.$bus.on('addMessageAttribute', function (formIndex) {
-            addMessageAttribute(formIndex);
+        this.$bus.on('addMessageAttribute', function (indices) {
+            addMessageAttribute(indices);
         });
 
         let deleteMessageAttribute = this.deleteMessageAttribute;
-        this.$bus.on('deleteMessageAttribute', function (formIndex, attrIndex) {
-            deleteMessageAttribute(formIndex, attrIndex);
+        this.$bus.on('deleteMessageAttribute', function (indices) {
+            deleteMessageAttribute(indices);
         });
 
     },
     methods: {
-        addReqFormField(formIndex){
-            this.$store.commit('addFieldToRequestForm', formIndex);
+        addReqFormField(indices){
+            this.$store.commit('addFieldToRequestForm', indices);
         },
-        deleteReqFormField(formIndex, fieldIndex){
-            this.$store.commit('deleteFieldFromRequestForm', formIndex, fieldIndex);
+        deleteReqFormField(indices){
+            this.$store.commit('deleteFieldFromRequestForm', indices);
         },
-        addMessageAttribute(rowIndex){
-            this.$store.commit('addAttributeToMessage', rowIndex);
+        addMessageAttribute(indices){
+            this.$store.commit('addAttributeToMessage', indices);
         },
-        deleteMessageAttribute(rowIndex, attrIndex){
-            this.$store.commit('deleteAttributeFromMessage', rowIndex, attrIndex);
+        deleteMessageAttribute(indices){
+            this.$store.commit('deleteAttributeFromMessage', indices);
         }
     }
 }
