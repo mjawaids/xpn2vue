@@ -305,7 +305,16 @@ export default {
                 break;
 
                 case 'obj':
-                    el = {type:'obj', label:'New Object', value:''};
+                    el = {type:'obj', label:'New Object', attributes:[
+                        {
+                            attribute: 'New Attribute',
+                            type: '',
+                            key: '',
+                            enumValues: '',
+                            parent: '',
+                            rule: ''
+                        }]
+                    };
                 break;
 
                 case 'subject':

@@ -44,6 +44,16 @@ export default {
             deleteMessageAttribute(indices);
         });
 
+        let addObjAttr = this.addObjAttr;
+        this.$bus.on('addObjAttr', function (indices) {
+            addObjAttr(indices);
+        });
+
+        let deleteObjAttr = this.deleteObjAttr;
+        this.$bus.on('deleteObjAttr', function (indices) {
+            deleteObjAttr(indices);
+        });
+
     },
     methods: {
         addReqFormField(indices){
@@ -57,7 +67,15 @@ export default {
         },
         deleteMessageAttribute(indices){
             this.$store.commit('deleteAttributeFromMessage', indices);
+        },
+        addObjAttr(indices){
+            this.$store.commit('addAttributeToObj', indices);
+        },
+        deleteObjAttr(indices){
+            console.log(indices);
+            this.$store.commit('deleteAttributeFromObj', indices);
         }
+
     }
 }
 </script>
