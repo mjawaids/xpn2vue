@@ -27,11 +27,11 @@
                             <md-list>
                                 <md-list-item v-for="(field, fieldIndex) in el.form.fields" :key="fieldIndex" @click="setFieldIndex(fieldIndex)">
                                     {{field.label}}
-                                    <md-button class="md-icon-button" @click="fireDeleteFormField(i, fieldIndex)">
+                                    <md-button class="md-icon-button" @click="fireDeleteFormField({i, j, fieldIndex})">
                                         <md-icon>delete</md-icon>
                                     </md-button>
                                 </md-list-item>
-                                <md-button class="md-raised md-primary md-dense" @click="fireAddFormField(i)">
+                                <md-button class="md-raised md-primary md-dense" @click="fireAddFormField({i, j})">
                                     <md-icon>add</md-icon>
                                 </md-button>
                             </md-list>
@@ -109,12 +109,12 @@ export default {
         fieldInd: ''
     }),
     methods: {
-        fireAddFormField(formIndex) {
-            this.$bus.emit('addReqFormField', formIndex);
+        fireAddFormField(indices) {
+            this.$bus.emit('addReqFormField', indices);
         },
 
-        fireDeleteFormField(formIndex, fieldIndex) {
-            this.$bus.emit('deleteReqFormField', formIndex, fieldIndex);
+        fireDeleteFormField(indices) {
+            this.$bus.emit('deleteReqFormField', indices);
         },
         openDialog(ref, value) {
             if(value === 'form'){

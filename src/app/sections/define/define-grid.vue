@@ -209,18 +209,8 @@ export default {
             return {
                 type:'message', 
                 value:'?',
-                message: {
-                    socialSecurityNumber: '',
-                    name: '',
-                    address: '',
-                    zipcode: '',
-                    place: '',
-                    dateOfBirth: '',
-                    gender: 'Uppercase(Gender)',
-                    contract: '',
-                    signature: ''
-                    }
-                };
+                attribute: [{title: "", value: ""}]
+            };
         },
 
         createAction() {
@@ -323,11 +313,30 @@ export default {
                 break;
 
                 case 'message':
-                    el = {type:'message', value:'?'};
+                    el = {type:'message', value:'?', attribute:[{title: "", value: ""}]};
                 break;
 
                 case 'request':
-                    el = {type:'request', value:'?'};
+                    el = {
+                        type:'request', 
+                        value:'?',
+                        form: {
+                            preCondition: [],
+                            fields: [
+                                {
+                                label: 'New Field',
+                                type: 'Input (Outpus, Search, Lookup)',
+                                component: 'text',
+                                value: '',
+                                rule: '',
+                                mask: '',
+                                H: '',
+                                W: ''
+                                }
+                            ],
+                            postCondition: []
+                        }
+                    }
                 break;
             }
 

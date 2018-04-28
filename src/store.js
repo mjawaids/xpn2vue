@@ -32,17 +32,9 @@ export default {
       message: {
         type: 'message',
         value: '?',
-        message: {
-          socialSecurityNumber: '',
-          name: '',
-          address: '',
-          zipcode: '',
-          place: '',
-          dateOfBirth: '',
-          gender: 'Uppercase(Gender)',
-          contract: '',
-          signature: ''
-        }
+        attribute: [
+          {title: '', value: ''}
+        ]
       },
       /** ACTION */
       action: {type:'action', label:'New Action', value:''},
@@ -106,20 +98,32 @@ export default {
             ]
         );
     },
-    addFieldToRequestForm(state, formIndex) {
-      state.data[formIndex][2].form.fields.push({
-        label: 'New Field',
-        type: 'Input (Outpus, Search, Lookup)',
-        component: 'text',
-        value: '',
-        rule: '',
-        mask: '',
-        H: '',
-        W: ''
+    addFieldToRequestForm(state, indices) {
+      state.data[indices.i][indices.j].form.fields.push({
+        label: "New Field",
+        type: "Input (Outpus, Search, Lookup)",
+        component: "text",
+        value: "",
+        rule: "",
+        mask: "",
+        H: "",
+        W: ""
       });
     },
-    deleteFieldFromRequestForm(state, formIndex, fieldIndex) {
-      state.data[formIndex][2].form.fields.splice(fieldIndex, 1);
+    deleteFieldFromRequestForm(state, indices) {
+      state.data[indices.i][indices.j].form.fields.splice(indices.fieldIndex, 1);
+    },
+
+    addAttributeToMessage(state, indices) {
+      console.log(indices, state.data[indices.i][indices.j]);
+      state.data[indices.i][indices.j].attribute.push({
+        title: "",
+        value: ""
+      });
+    },
+
+    deleteAttributeFromMessage(state, indices) {
+      state.data[indices.i][indices.j].attribute.splice(indices.attrIndex, 1);
     },
 
     updateData(state, value) {
