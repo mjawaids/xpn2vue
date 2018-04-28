@@ -59,6 +59,11 @@ export default {
             addObjToAction(data);
         });
 
+        let addObjToResponse = this.addObjToResponse;
+        this.$bus.on('addObjToResponse', function (data) {
+            addObjToResponse(data);
+        });
+
     },
     methods: {
         addReqFormField(indices){
@@ -82,6 +87,9 @@ export default {
         addObjToAction(data){
             this.$store.commit('addObjToAction', data);
         },
+        addObjToResponse(data){
+            this.$store.commit('addObjToResponse', data);
+        }
 
     }
 }

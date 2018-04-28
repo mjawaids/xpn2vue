@@ -162,7 +162,7 @@ export default {
         },
 
         createResponse() {
-            return {type:'response', value:'?'};
+            return {type:'response', value:'?', objects:[]};
         },
 
         createService() {
@@ -297,7 +297,7 @@ export default {
 
             switch(type) {
                 case 'response':
-                    el = {type:'response', value:'?'};
+                    el = {type:'response', value:'?', objects:[]};
                 break;
 
                 case 'task':

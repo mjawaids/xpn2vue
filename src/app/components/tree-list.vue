@@ -4,11 +4,11 @@
       <md-list class="md-dense">
           <md-list-item class="mini-dropdown-btn" :style="indentStyle">
               <div class="z-index-2">
-                <span class="tree-list-label">{{item.label}}, </span>
-                <span>Order = </span>
-                <input class="input-bordered" v-model="item.order">
-                <span>, Filter = </span>
-                <input class="input-bordered" v-model="item.filter">
+                <span class="tree-list-label">{{item.label}}</span>
+                <span v-if="type === 'action'">, Order = </span>
+                <input v-if="type === 'action'" class="input-bordered" v-model="item.order">
+                <span v-if="type === 'action'">, Filter = </span>
+                <input v-if="type === 'action'" class="input-bordered" v-model="item.filter">
                 <md-button class="md-icon-button md-dense" @click="down(itemIndex)">
                   <md-icon>arrow_downward</md-icon>
                 </md-button>
@@ -36,7 +36,7 @@
 <script>
 export default {
   name: 'tree-list',
-  props: ['obj', 'depth'],
+  props: ['obj', 'depth', 'type'],
   methods: {
     up(itemIndex){
       let item = this.obj[itemIndex];
@@ -58,11 +58,9 @@ export default {
       }
     },
     unIndent(itemIndex){
-      // if(this.obj[itemIndex-1].children){
-        let item = this.obj[itemIndex];
-        this.obj.splice(itemIndex, 1);
-        this.$emit('unindent', item);
-      // }
+      let item = this.obj[itemIndex];
+      this.obj.splice(itemIndex, 1);
+      this.$emit('unindent', item);
     },
     handleUnIndent(event){
       this.obj.push(event);
@@ -89,6 +87,8 @@ export default {
   .tree-list-label{
     display: inline-block;
     width: 80px;
+    height: 30px;
+    line-height: 30px;
   }
 
 </style>

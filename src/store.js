@@ -9,7 +9,7 @@ export default {
       /**     TOP ROWS     */
 
       /** RESPONSE */
-      response: {type:'response', value:'?'},
+      response: {type:'response', value:'?', objects: ''},
       /** SERVICE */
       service: {type:'service', label:'New Service', value:''},
       /** TASK */
@@ -168,6 +168,34 @@ export default {
           children: []
         }
       );
+    },
+        addObjToAction(state, data) {
+      state.data[data.i][data.j].objects.push(
+        {
+          label: data.selectedObj,
+          order: '',
+          filter: '',
+          children: []
+        }
+      );
+    },
+    
+    addObjToResponse(state, data) {
+      state.data[data.i][data.j].objects.push({
+        label: data.selectedObj,
+        objectAttributes: {
+          order: '',
+          filter: ''
+        },
+        fieldAttributes: {
+          label: '',
+          value: '',
+          mask: '',
+          W: '',
+          H: ''
+        },
+        children: []
+      });
     },
 
     updateData(state, value) {
