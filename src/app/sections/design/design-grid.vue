@@ -23,7 +23,7 @@ export default {
         }
     },
     created() {
-
+        
         let addReqFormField = this.addReqFormField;
         this.$bus.on('addReqFormField', function (indices) {
             addReqFormField(indices);
@@ -54,6 +54,11 @@ export default {
             deleteObjAttr(indices);
         });
 
+        let addObjToAction = this.addObjToAction;
+        this.$bus.on('addObjToAction', function (data) {
+            addObjToAction(data);
+        });
+
     },
     methods: {
         addReqFormField(indices){
@@ -72,9 +77,11 @@ export default {
             this.$store.commit('addAttributeToObj', indices);
         },
         deleteObjAttr(indices){
-            console.log(indices);
             this.$store.commit('deleteAttributeFromObj', indices);
-        }
+        },
+        addObjToAction(data){
+            this.$store.commit('addObjToAction', data);
+        },
 
     }
 }

@@ -63,7 +63,6 @@ export default {
         fireAddCol() {
             this.$bus.emit('addCol', true);
         },
-
         fireDeleteCol() {
             this.$bus.emit('deleteCol', this.el);
         },
@@ -93,6 +92,7 @@ export default {
             return Object.keys(this.el.attributes[0]);
         }
     }
+    
 }
 </script>
 

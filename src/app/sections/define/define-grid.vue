@@ -214,7 +214,7 @@ export default {
         },
 
         createAction() {
-            return {type:'action', label:'New Action', value:''};
+            return {type:'action', label:'New Action', value:'', objects:[]};
         },
 
         addRequestsInRow(row, numOfRequests) {
