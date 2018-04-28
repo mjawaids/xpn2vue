@@ -18,7 +18,18 @@ export default {
       /**     MID ROWS     */
 
       /** OBJECT */
-      obj: {type:'obj', label:'New Object', value:''},
+      obj: {
+        type: 'obj',
+        label: 'New Object',
+        attributes: [{
+          attribute: 'New Attribute',
+          type: '',
+          key: '',
+          enumValues: '',
+          parent: '',
+          rule: ''
+        }]
+      },
       /** RULES */
         rules: {type:'rules', value:[
             {type:'rule', label:'New Rule', rule:'' }
@@ -124,6 +135,21 @@ export default {
 
     deleteAttributeFromMessage(state, indices) {
       state.data[indices.i][indices.j].attribute.splice(indices.attrIndex, 1);
+    },
+
+    addAttributeToObj(state, indices) {
+      state.data[indices.i][indices.j].attributes.push({
+          attribute: 'New Attribute',
+          type: '',
+          key: '',
+          enumValues: '',
+          parent: '',
+          rule: ''
+        });
+    },
+
+    deleteAttributeFromObj(state, indices) {
+      state.data[indices.i][indices.j].attributes.splice(indices.attrIndex, 1);
     },
 
     updateData(state, value) {

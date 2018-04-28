@@ -12,10 +12,35 @@
     <div v-if="mode === 'design'" class="vertical">
         <input @click="openDialog(`dialog-${i}${j}`)" class="min-width-small height-20" :placeholder="el.label" v-model="el.value" readonly>
         <md-dialog :ref="`dialog-${i}${j}`">
-            <md-dialog-content>
-                <md-input-container>
-                    <md-input @keyup.enter.native="saveAndCloseDialog(`dialog-${i}${j}`)" v-model="value"></md-input>
-                </md-input-container>
+            <md-dialog-title class="text-center">Open Account Form Details</md-dialog-title>
+            <md-dialog-content class="modal-grid">
+                    <div class="column">
+                        <md-toolbar md-theme="white">
+                            <span class="md-title">Attributes</span>
+                        </md-toolbar>
+                        <md-list class="md-dense">
+                            <md-list-item v-for="(attr, attrIndex) in el.attributes" :key="attrIndex" @click="setAttrIndex(attrIndex)">
+                                {{attr.attribute}}
+                                <md-button class="md-icon-button" @click="fireDeleteObjAttr({i, j, attrIndex})">
+                                    <md-icon>delete</md-icon>
+                                </md-button>
+                            </md-list-item>
+                            <md-button class="md-raised md-primary md-dense" @click="fireAddObjAttr({i, j})">
+                                <md-icon>add</md-icon>
+                            </md-button>
+                        </md-list>
+                    </div>
+                    <div class="column">
+                        <div v-if="!el.attributes[attrIndex]">Please select an Attribute from side menu</div>
+                        <div v-else>
+                            <md-input-container v-for="(field, fieldIndex) in ObjAttrFields" :key="fieldIndex">
+                                <label>{{field}}</label>
+                                <md-input v-model="el.attributes[attrIndex][field]"></md-input>
+                            </md-input-container>
+                        </div>
+
+                    </div>
+
             </md-dialog-content>
 
             <md-dialog-actions>
@@ -32,7 +57,7 @@ export default {
     name: 'obj',
     props: ['el', 'mode', 'i', 'j'],
     data: () => ({
-        value: ''
+        attrIndex: ''
     }),
     methods: {
         fireAddCol() {
@@ -41,6 +66,12 @@ export default {
 
         fireDeleteCol() {
             this.$bus.emit('deleteCol', this.el);
+        },
+        fireAddObjAttr(indices) {
+            this.$bus.emit('addObjAttr', indices);
+        },
+        fireDeleteObjAttr(indices) {
+            this.$bus.emit('deleteObjAttr', indices);
         },
         openDialog(ref) {
             this.$refs[ref].open();
@@ -52,6 +83,14 @@ export default {
         saveAndCloseDialog(ref) {
             this.closeDialog(ref);
             this.el.value = this.value;
+        },
+        setAttrIndex(index) {
+            this.attrIndex = index;
+        }
+    },
+    computed: {
+        ObjAttrFields(){
+            return Object.keys(this.el.attributes[0]);
         }
     }
 }
