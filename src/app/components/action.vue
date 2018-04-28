@@ -13,7 +13,7 @@
         <md-dialog :ref="`dialog-${i}${j}`">
             <md-dialog-title class="text-center">Monthly Costs Action Details</md-dialog-title>
             <md-dialog-content class="bigger-modal">
-              <tree-list :obj="el.objects" :depth="1" @unindent="handleUnIndent"></tree-list>
+              <tree-list :obj="el.objects" :depth="1" :type="el.type" @unindent="handleUnIndent"></tree-list>
               <md-input-container>
                   <label>Add Object/Message</label>
                   <md-select name="object" v-model="selectedObj">
