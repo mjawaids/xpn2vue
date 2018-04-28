@@ -11,10 +11,16 @@
     <div v-if="mode === 'design'">        
         <input @click="openDialog(`dialog-${i}${j}`)" class="min-width-small height-20" :placeholder="el.label" v-model="el.value" readonly>
         <md-dialog :ref="`dialog-${i}${j}`">
-            <md-dialog-content>
-                <md-input-container>
-                    <md-input @keyup.enter.native="saveAndCloseDialog(`dialog-${i}${j}`)" v-model="value"></md-input>
-                </md-input-container>
+            <md-dialog-title class="text-center">Monthly Costs Action Details</md-dialog-title>
+            <md-dialog-content class="bigger-modal">
+              <tree-list :obj="el.objects" :depth="1" @unindent="handleUnIndent"></tree-list>
+              <md-input-container>
+                  <label>Add Object/Message</label>
+                  <md-select name="object" v-model="selectedObj">
+                    <md-option v-for="(obj, objIndex) in objects" :key="objIndex" :value="obj.value || obj.label">{{obj.value || obj.label}}</md-option>
+                  </md-select>
+                  <md-button class="md-raised md-primary md-dense" @click="addObject({i, j, selectedObj})"><md-icon>add</md-icon></md-button>
+              </md-input-container>
             </md-dialog-content>
 
             <md-dialog-actions>
@@ -29,11 +35,14 @@
 </template>
 
 <script>
+import treeList from './tree-list.vue';
+
 export default {
   name: "action",
   props: ["el", "mode", "i", "j"],
+  components: {treeList},
   data: () => ({
-        value: ''
+    selectedObj: ''
   }),
   methods: {
     fireAddRow() {
@@ -52,7 +61,20 @@ export default {
     },
     saveAndCloseDialog(ref) {
       this.closeDialog(ref);
-      this.el.value = this.value;
+    },
+    addObject(data) {
+      if(this.selectedObj) {
+        this.$bus.emit('addObjToAction', data);
+        this.selectedObj = '';
+      };
+    },
+    handleUnIndent(event){
+      this.el.objects.push(event);
+    }
+  },
+  computed: {
+    objects() {
+      return this.$store.getters.getAllObjects;
     }
   }
 };
@@ -91,5 +113,9 @@ export default {
 
 .font-medium {
   font-size: medium;
+}
+
+.bigger-modal {
+  width: 1000px;
 }
 </style>

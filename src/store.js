@@ -21,19 +21,23 @@ export default {
       obj: {
         type: 'obj',
         label: 'New Object',
-        attributes: [{
-          attribute: 'New Attribute',
-          type: '',
-          key: '',
-          enumValues: '',
-          parent: '',
-          rule: ''
-        }]
+        value:'',
+        attributes: [
+          {
+            attribute: 'New Attribute',
+            type: '',
+            key: '',
+            enumValues: '',
+            parent: '',
+            rule: ''
+          }
+        ]
       },
       /** RULES */
-        rules: {type:'rules', value:[
-            {type:'rule', label:'New Rule', rule:'' }
-        ]},
+      rules: {
+        type:'rules',
+        value:[{type:'rule', label:'New Rule', rule:'' }]
+      },
       /** SUBJECT */
       subject: {type:'subject', label:'New Actor', value:''},
 
@@ -43,12 +47,10 @@ export default {
       message: {
         type: 'message',
         value: '?',
-        attribute: [
-          {title: '', value: ''}
-        ]
+        attribute: [{title: '', value: ''}]
       },
       /** ACTION */
-      action: {type:'action', label:'New Action', value:''},
+      action: {type:'action', label:'New Action', objects: [] },
       /** REQUEST */
       request: {
         type: 'request',
@@ -73,52 +75,57 @@ export default {
     }
   },
 
-  // getters: {
-  //     createService: state => {
-  //         return {type:'service', label:'New Service mama', value:''};
-  //     }
-  // },
+  getters: {
+    // createService: state => {
+    //     return {type:'service', label:'New Service mama', value:''};
+    // }
+    getAllObjects(state) {
+      return state.data
+        .map(row => row.filter(column => column.type === 'obj'))
+        .filter(item => item.length)[0];
+    }
+  },
 
   mutations: {
     addTopRow(state) {
-        state.data.push(
-            [
+      state.data.push(
+        [
         state.defaults.response,
         state.defaults.service,
         state.defaults.task
-            ]
-        );
+        ]
+      );
     },
 
     addMidRow(state) {
-        state.data.push(
-            [
+      state.data.push(
+        [
         state.defaults.obj,
         state.defaults.rules,
         state.defaults.subject
-            ]
-        );
+        ]
+      );
     },
 
     addBottomRow(state) {
-        state.data.push(
-            [
+      state.data.push(
+        [
         state.defaults.message,
         state.defaults.action,
         state.defaults.request
-            ]
-        );
+        ]
+      );
     },
     addFieldToRequestForm(state, indices) {
       state.data[indices.i][indices.j].form.fields.push({
-        label: "New Field",
-        type: "Input (Outpus, Search, Lookup)",
-        component: "text",
-        value: "",
-        rule: "",
-        mask: "",
-        H: "",
-        W: ""
+        label: 'New Field',
+        type: 'Input (Outpus, Search, Lookup)',
+        component: 'text',
+        value: '',
+        rule: '',
+        mask: '',
+        H: '',
+        W: ''
       });
     },
     deleteFieldFromRequestForm(state, indices) {
@@ -128,8 +135,8 @@ export default {
     addAttributeToMessage(state, indices) {
       console.log(indices, state.data[indices.i][indices.j]);
       state.data[indices.i][indices.j].attribute.push({
-        title: "",
-        value: ""
+        title: '',
+        value: ''
       });
     },
 
@@ -139,17 +146,28 @@ export default {
 
     addAttributeToObj(state, indices) {
       state.data[indices.i][indices.j].attributes.push({
-          attribute: 'New Attribute',
-          type: '',
-          key: '',
-          enumValues: '',
-          parent: '',
-          rule: ''
-        });
+        attribute: 'New Attribute',
+        type: '',
+        key: '',
+        enumValues: '',
+        parent: '',
+        rule: ''
+      });
     },
 
     deleteAttributeFromObj(state, indices) {
       state.data[indices.i][indices.j].attributes.splice(indices.attrIndex, 1);
+    },
+
+    addObjToAction(state, data) {
+      state.data[data.i][data.j].objects.push(
+        {
+          label: data.selectedObj,
+          order: '',
+          filter: '',
+          children: []
+        }
+      );
     },
 
     updateData(state, value) {
