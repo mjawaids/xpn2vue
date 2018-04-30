@@ -2,13 +2,15 @@
   <div>
     <div v-for="(item, itemIndex) in obj" :key="itemIndex">
       <md-list class="md-dense">
-          <md-list-item class="mini-dropdown-btn" :style="indentStyle">
-              <div class="z-index-2">
+          <md-list-item :style="indentStyle" @click="handleClick(item)">
+              <div class="z-index-2" @click="handleClick(item)">
                 <span class="tree-list-label">{{item.label}}</span>
-                <span v-if="type === 'action'">, Order = </span>
-                <input v-if="type === 'action'" class="input-bordered" v-model="item.order">
-                <span v-if="type === 'action'">, Filter = </span>
-                <input v-if="type === 'action'" class="input-bordered" v-model="item.filter">
+                <span v-if="type === 'action'">
+                  <span>, Order = </span>
+                  <input class="input-bordered" v-model="item.order">
+                  <span>, Filter = </span>
+                  <input class="input-bordered" v-model="item.filter">
+                </span>
                 <md-button class="md-icon-button md-dense" @click="down(itemIndex)">
                   <md-icon>arrow_downward</md-icon>
                 </md-button>
@@ -22,6 +24,9 @@
                   <md-icon>arrow_forward</md-icon>
                 </md-button>
                 </div>
+                <md-button class="md-icon-button md-dense" @click="deleteObj(itemIndex)">
+                  <md-icon>delete</md-icon>
+                </md-button>
               <md-list-expand v-if="item.children.length">
               <md-list>
                 <tree-list :obj="item.children" :depth="depth+1" @unindent="handleUnIndent"></tree-list>
@@ -37,6 +42,9 @@
 export default {
   name: 'tree-list',
   props: ['obj', 'depth', 'type'],
+  data: () => ({
+    clickedItem: ''
+  }),
   methods: {
     up(itemIndex){
       let item = this.obj[itemIndex];
@@ -51,7 +59,7 @@ export default {
       this.obj.splice(nextIndex, 0, item);
     },
     indent(itemIndex){
-      if(this.obj[itemIndex-1].children){
+      if(this.obj[itemIndex-1]){
         let item = this.obj[itemIndex];
         this.obj.splice(itemIndex, 1);
         this.obj[itemIndex-1].children.push(item);
@@ -62,8 +70,21 @@ export default {
       this.obj.splice(itemIndex, 1);
       this.$emit('unindent', item);
     },
+    deleteObj(itemIndex) {
+      let clickedItemString = JSON.stringify(this.clickedItem);
+      let currentItemString = JSON.stringify(this.obj[itemIndex]);
+      console.log(clickedItemString === currentItemString);
+      if(clickedItemString === currentItemString){
+        this.handleClick("");
+      }
+      this.obj.splice(itemIndex, 1);
+    },
     handleUnIndent(event){
       this.obj.push(event);
+    },
+    handleClick(obj) {
+      this.$bus.emit('itemClicked', obj);
+      this.clickedItem = obj;
     }
   },
   computed: {

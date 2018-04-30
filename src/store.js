@@ -9,7 +9,7 @@ export default {
       /**     TOP ROWS     */
 
       /** RESPONSE */
-      response: {type:'response', value:'?', objects: ''},
+      response: {type:'response', value:'?', objects: []},
       /** SERVICE */
       service: {type:'service', label:'New Service', value:''},
       /** TASK */
@@ -133,7 +133,6 @@ export default {
     },
 
     addAttributeToMessage(state, indices) {
-      console.log(indices, state.data[indices.i][indices.j]);
       state.data[indices.i][indices.j].attribute.push({
         title: '',
         value: ''
@@ -169,7 +168,7 @@ export default {
         }
       );
     },
-        addObjToAction(state, data) {
+    addObjToAction(state, data) {
       state.data[data.i][data.j].objects.push(
         {
           label: data.selectedObj,
