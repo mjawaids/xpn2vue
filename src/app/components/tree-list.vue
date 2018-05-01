@@ -29,7 +29,7 @@
                 </md-button>
               <md-list-expand v-if="item.children.length">
               <md-list>
-                <tree-list :obj="item.children" :depth="depth+1" @unindent="handleUnIndent"></tree-list>
+                <tree-list :obj="item.children" :depth="depth+1" :type="type" @unindent="handleUnIndent"></tree-list>
               </md-list>
               </md-list-expand>
           </md-list-item>
