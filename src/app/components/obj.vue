@@ -12,7 +12,7 @@
     <div v-if="mode === 'design'" class="vertical">
         <input @click="openDialog(`dialog-${i}${j}`)" class="min-width-small height-20" :placeholder="el.label" v-model="el.value" readonly>
         <md-dialog :ref="`dialog-${i}${j}`">
-            <md-dialog-title class="text-center">Open Account Form Details</md-dialog-title>
+            <md-dialog-title class="text-center">{{el.value || el.label}} Form Details</md-dialog-title>
             <md-dialog-content class="modal-grid">
                     <div class="column">
                         <md-toolbar md-theme="white">
@@ -54,86 +54,85 @@
 
 <script>
 export default {
-    name: 'obj',
-    props: ['el', 'mode', 'i', 'j'],
-    data: () => ({
-        attrIndex: ''
-    }),
-    methods: {
-        fireAddCol() {
-            this.$bus.emit('addCol', true);
-        },
-        fireDeleteCol() {
-            this.$bus.emit('deleteCol', this.el);
-        },
-        fireAddObjAttr(indices) {
-            this.$bus.emit('addObjAttr', indices);
-        },
-        fireDeleteObjAttr(indices) {
-            this.$bus.emit('deleteObjAttr', indices);
-        },
-        openDialog(ref) {
-            this.$refs[ref].open();
-            this.value = this.el.value;
-        },
-        closeDialog(ref) {
-            this.$refs[ref].close();
-        },
-        saveAndCloseDialog(ref) {
-            this.closeDialog(ref);
-            this.el.value = this.value;
-        },
-        setAttrIndex(index) {
-            this.attrIndex = index;
-        }
+  name: "obj",
+  props: ["el", "mode", "i", "j"],
+  data: () => ({
+    attrIndex: ""
+  }),
+  methods: {
+    fireAddCol() {
+      this.$bus.emit("addCol", true);
     },
-    computed: {
-        ObjAttrFields(){
-            return Object.keys(this.el.attributes[0]);
-        }
+    fireDeleteCol() {
+      this.$bus.emit("deleteCol", this.el);
+    },
+    fireAddObjAttr(indices) {
+      this.$bus.emit("addObjAttr", indices);
+    },
+    fireDeleteObjAttr(indices) {
+      this.$bus.emit("deleteObjAttr", indices);
+    },
+    openDialog(ref) {
+      this.$refs[ref].open();
+      this.value = this.el.value;
+    },
+    closeDialog(ref) {
+      this.$refs[ref].close();
+    },
+    saveAndCloseDialog(ref) {
+      this.closeDialog(ref);
+      this.el.value = this.value;
+    },
+    setAttrIndex(index) {
+      this.attrIndex = index;
     }
-    
-}
+  },
+  computed: {
+    ObjAttrFields() {
+      return Object.keys(this.el.attributes[0]);
+    }
+  }
+};
 </script>
 
 <style>
 .vertical {
-    transform: rotate(90deg);
-    position: absolute;
-    transform-origin: 10px 12px;
+  transform: rotate(90deg);
+  position: absolute;
+  transform-origin: 10px 12px;
 }
 
 .min-width-small {
-    min-width: 160px;
-    width: 160px;
+  min-width: 160px;
+  width: 160px;
 }
 
 .height-20 {
-    height: 20px;
+  height: 20px;
 }
 
 .btn-style {
-    width: 20px !important;
-    min-width: 20px !important;
+  width: 20px !important;
+  min-width: 20px !important;
 
-    height: 20px !important;
-    min-height: 20px !important;
+  height: 20px !important;
+  min-height: 20px !important;
 
-    padding: 0px !important;
-    margin: 0px !important;
+  padding: 0px !important;
+  margin: 0px !important;
 
-    line-height: 0;
+  line-height: 0;
 }
 
 .btn-green {
-    color: #4caf50;
+  color: #4caf50;
 }
 
 .btn-red {
-    color: #f44336;
+  color: #f44336;
 }
 
 .font-medium {
-    font-size: medium;
+  font-size: medium;
 }
 </style>

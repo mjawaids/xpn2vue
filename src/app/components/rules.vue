@@ -32,7 +32,7 @@
                         </md-table-row>
                     </md-table-body>
                 </md-table>
-                <md-button class="md-raised md-primary md-dense" @click="fireAddRule">Add Attribute</md-button>
+                <!-- <md-button class="md-raised md-primary md-dense" @click="fireAddRule">Add Attribute</md-button> -->
             </md-dialog-content>
 
             <md-dialog-actions>

@@ -13,7 +13,7 @@
             <md-option value="?" selected>?</md-option>
         </md-select>
         <md-dialog v-if="el.value === 'form'" :ref="`dialog-${i}${j}`">
-            <md-dialog-title class="text-center">Open Account Form Details</md-dialog-title>
+            <md-dialog-title class="text-center">{{getActionTitle.value || getActionTitle.label}} Form Details</md-dialog-title>
             <md-dialog-content class="modal-grid">
                     <div class="column">
                         <md-list class="md-dense">
@@ -51,11 +51,16 @@
                             </md-input-container>
                             <md-input-container>
                                 <label>Type</label>
-                                <md-input v-model="el.form.fields[fieldInd].type"></md-input>
+                                <md-select v-model="el.form.fields[fieldInd].type">
+                                    <md-option value="input">Input</md-option>
+                                    <md-option value="output">Output</md-option>
+                                    <md-option value="search">Search</md-option>
+                                    <md-option value="lookup">Lookup</md-option>
+                                </md-select>
                             </md-input-container>
                             <md-input-container>
                                 <label>Component</label>
-                                <md-select name="movie" v-model="el.form.fields[fieldInd].component">
+                                <md-select v-model="el.form.fields[fieldInd].component">
                                     <md-option value="text">Text</md-option>
                                     <md-option value="textarea">Textarea</md-option>
                                     <md-option value="tel">Tel</md-option>
@@ -72,6 +77,9 @@
                             <md-input-container>
                                 <label>Rule</label>
                                 <md-input v-model="el.form.fields[fieldInd].rule"></md-input>
+                                <md-select v-model="el.form.fields[fieldInd].rule">
+                                    <md-option v-for="(rule, ruleIndex) in allRules" :key="ruleIndex" :value="rule.value || rule.label">{{rule.value || rule.label}}</md-option>
+                                </md-select>
                             </md-input-container>
                             <md-input-container>
                                 <label>Mask</label>
@@ -102,63 +110,70 @@
 
 <script>
 export default {
-    name: 'request',
-    props: ['el', 'mode', 'i', 'j'],
-    data: () => ({
-        value: '',
-        fieldInd: ''
-    }),
-    methods: {
-        fireAddFormField(indices) {
-            this.$bus.emit('addReqFormField', indices);
-        },
+  name: "request",
+  props: ["el", "mode", "i", "j"],
+  data: () => ({
+    value: "",
+    fieldInd: ""
+  }),
+  methods: {
+    fireAddFormField(indices) {
+      this.$bus.emit("addReqFormField", indices);
+    },
 
-        fireDeleteFormField(indices) {
-            this.$bus.emit('deleteReqFormField', indices);
-        },
-        openDialog(ref, value) {
-            if(value === 'form'){
-                this.$refs[ref].open();
-                this.value = this.el.value;
-            }
-        },
-        closeDialog(ref) {
-            this.$refs[ref].close();
-        },
-        saveAndCloseDialog(ref) {
-            this.closeDialog(ref);
-        },
-        setFieldIndex(fieldIndex){
-            this.fieldInd = fieldIndex;
-        }
+    fireDeleteFormField(indices) {
+      this.$bus.emit("deleteReqFormField", indices);
+    },
+    openDialog(ref, value) {
+      if (value === "form") {
+        this.$refs[ref].open();
+        this.value = this.el.value;
+      }
+    },
+    closeDialog(ref) {
+      this.$refs[ref].close();
+    },
+    saveAndCloseDialog(ref) {
+      this.closeDialog(ref);
+    },
+    setFieldIndex(fieldIndex) {
+      this.fieldInd = fieldIndex;
     }
-}
+  },
+  computed: {
+    getActionTitle() {
+      return this.$store.getters.getActionTitle({ i: this.i });
+    },
+    allRules() {
+      return this.$store.getters.getAllRules;
+    }
+  }
+};
 </script>
 
 <style>
 .corner-style {
-    width:20px !important;
-    height:20px !important;
-    margin:auto;
+  width: 20px !important;
+  height: 20px !important;
+  margin: auto;
 }
 
 .md-select-value {
-    padding-right: 20px !important;
-    line-height: 20px !important;
-    min-width:20px;
+  padding-right: 20px !important;
+  line-height: 20px !important;
+  min-width: 20px;
 }
 
 .modal-grid {
-    display: grid;
-    grid-column-gap: 10px;
-    grid-template-columns: 200px 400px;
-    height: 400px;
+  display: grid;
+  grid-column-gap: 10px;
+  grid-template-columns: 200px 400px;
+  height: 400px;
 }
 
 .modal-grid .column {
-    border: solid 1px grey;
-    border-radius: 5px; 
-    padding: 5px;
+  border: solid 1px grey;
+  border-radius: 5px;
+  padding: 5px;
 }
-
 </style>
