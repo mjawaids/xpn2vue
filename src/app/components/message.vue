@@ -16,7 +16,7 @@
             <md-option value="?">?</md-option>
         </md-select>
         <md-dialog v-if="el.value !== '?' && el.value" :ref="`dialog-${i}${j}`">
-            <md-dialog-title class="text-center">Create Client Message Details</md-dialog-title>
+            <md-dialog-title class="text-center">{{getObjTitle.value || getObjTitle.label}} Message Details</md-dialog-title>
             <md-dialog-content class="big-modal">
                 <md-table>
                     <md-table-header>
@@ -59,67 +59,71 @@
 
 <script>
 export default {
-    name: 'message',
-    props: ['el', 'mode', 'i', 'j'],
-    methods: {
-        fireAddAttribute(indices) {
-            this.$bus.emit('addMessageAttribute', indices);
-        },
+  name: "message",
+  props: ["el", "mode", "i", "j"],
+  methods: {
+    fireAddAttribute(indices) {
+      this.$bus.emit("addMessageAttribute", indices);
+    },
 
-        fireDeleteAttribute(indices) {
-            this.$bus.emit('deleteMessageAttribute', indices);
-        },
-        openDialog(ref, value) {
-            if(value !== '?' && value){
-                this.$refs[ref].open();
-            }
-        },
-        closeDialog(ref) {
-            this.$refs[ref].close();
-        },
-        saveAndCloseDialog(ref) {
-            this.closeDialog(ref);
-        },
-        setFieldIndex(fieldIndex){
-            this.fieldInd = fieldIndex;
-        }
+    fireDeleteAttribute(indices) {
+      this.$bus.emit("deleteMessageAttribute", indices);
+    },
+    openDialog(ref, value) {
+      if (value !== "?" && value) {
+        this.$refs[ref].open();
+      }
+    },
+    closeDialog(ref) {
+      this.$refs[ref].close();
+    },
+    saveAndCloseDialog(ref) {
+      this.closeDialog(ref);
+    },
+    setFieldIndex(fieldIndex) {
+      this.fieldInd = fieldIndex;
     }
-}
+  },
+  computed: {
+    getObjTitle() {
+      return this.$store.getters.getObjectTitle({ i: this.i, j: this.j });
+    }
+  }
+};
 </script>
 
 <style>
 .corner-style {
-    width:20px !important;
-    height:20px !important;
-    margin:auto;
+  width: 20px !important;
+  height: 20px !important;
+  margin: auto;
 }
 
 .md-select-value {
-    padding-right: 20px !important;
-    line-height: 20px !important;
-    min-width:20px;
+  padding-right: 20px !important;
+  line-height: 20px !important;
+  min-width: 20px;
 }
 
 .big-modal {
-    width: 600px;
+  width: 600px;
 }
 
 .text-center {
-    text-align: center;
+  text-align: center;
 }
 
 label {
-    text-transform: capitalize;
+  text-transform: capitalize;
 }
 
 .table-attribute {
-    width: 250px;
+  width: 250px;
 }
 
 .condensed-input {
-    margin: 0;
-    padding: 0;
-    min-height: auto !important;
+  margin: 0;
+  padding: 0;
+  min-height: auto !important;
 }
-
 </style>

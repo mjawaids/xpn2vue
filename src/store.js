@@ -9,11 +9,11 @@ export default {
       /**     TOP ROWS     */
 
       /** RESPONSE */
-      response: {type:'response', value:'?', objects: []},
+      response: { type: 'response', value: '?', objects: [] },
       /** SERVICE */
-      service: {type:'service', label:'New Service', value:''},
+      service: { type: 'service', label: 'New Service', value: '' },
       /** TASK */
-      task: {type:'task', value:'?'},
+      task: { type: 'task', value: '?' },
 
       /**     MID ROWS     */
 
@@ -21,7 +21,7 @@ export default {
       obj: {
         type: 'obj',
         label: 'New Object',
-        value:'',
+        value: '',
         attributes: [
           {
             attribute: 'New Attribute',
@@ -35,11 +35,11 @@ export default {
       },
       /** RULES */
       rules: {
-        type:'rules',
-        value:[{type:'rule', label:'New Rule', rule:'' }]
+        type: 'rules',
+        value: [{ type: 'rule', label: 'New Rule', rule: '' }]
       },
       /** SUBJECT */
-      subject: {type:'subject', label:'New Actor', value:''},
+      subject: { type: 'subject', label: 'New Actor', value: '' },
 
       /**     BOTTOM ROWS     */
 
@@ -47,10 +47,10 @@ export default {
       message: {
         type: 'message',
         value: '?',
-        attribute: [{title: '', value: ''}]
+        attribute: [{ title: '', value: '' }]
       },
       /** ACTION */
-      action: {type:'action', label:'New Action', objects: [] },
+      action: { type: 'action', label: 'New Action', objects: [] },
       /** REQUEST */
       request: {
         type: 'request',
@@ -60,7 +60,7 @@ export default {
           fields: [
             {
               label: 'New Field',
-              type: 'Input (Outpus, Search, Lookup)',
+              type: 'input',
               component: 'text',
               value: '',
               rule: '',
@@ -83,6 +83,18 @@ export default {
       return state.data
         .map(row => row.filter(column => column.type === 'obj'))
         .filter(item => item.length)[0];
+    },
+    getAllRules: (state) => {
+      return state.data
+        .map(item => item.filter(rules => rules.type === 'rules'))
+        .filter(item => item[0])[0][0].value;
+    },
+    getActionTitle: (state) => (indices) => {
+      return state.data[indices.i].filter(action => action.type === 'action')[0];
+    },
+    getObjectTitle: (state) => (indices) => {
+      return state.data.map(item => item.filter(obj => obj.type === 'obj'))
+        .filter(item => item[0])[0][indices.j];
     }
   },
 
@@ -90,9 +102,9 @@ export default {
     addTopRow(state) {
       state.data.push(
         [
-        state.defaults.response,
-        state.defaults.service,
-        state.defaults.task
+          state.defaults.response,
+          state.defaults.service,
+          state.defaults.task
         ]
       );
     },
@@ -100,9 +112,9 @@ export default {
     addMidRow(state) {
       state.data.push(
         [
-        state.defaults.obj,
-        state.defaults.rules,
-        state.defaults.subject
+          state.defaults.obj,
+          state.defaults.rules,
+          state.defaults.subject
         ]
       );
     },
@@ -110,9 +122,9 @@ export default {
     addBottomRow(state) {
       state.data.push(
         [
-        state.defaults.message,
-        state.defaults.action,
-        state.defaults.request
+          state.defaults.message,
+          state.defaults.action,
+          state.defaults.request
         ]
       );
     },
@@ -178,7 +190,7 @@ export default {
         }
       );
     },
-    
+
     addObjToResponse(state, data) {
       state.data[data.i][data.j].objects.push({
         label: data.selectedObj,

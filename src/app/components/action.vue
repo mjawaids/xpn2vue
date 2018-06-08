@@ -11,7 +11,7 @@
     <div v-if="mode === 'design'">        
         <input @click="openDialog(`dialog-${i}${j}`)" class="min-width-small height-20" :placeholder="el.label" v-model="el.value" readonly>
         <md-dialog :ref="`dialog-${i}${j}`">
-            <md-dialog-title class="text-center">Monthly Costs Action Details</md-dialog-title>
+            <md-dialog-title class="text-center">{{el.value || el.label}} Action Details</md-dialog-title>
             <md-dialog-content class="bigger-modal">
               <tree-list :obj="el.objects" :depth="1" :type="el.type" @unindent="handleUnIndent"></tree-list>
               <md-input-container>
@@ -35,14 +35,14 @@
 </template>
 
 <script>
-import treeList from './tree-list.vue';
+import treeList from "./tree-list.vue";
 
 export default {
   name: "action",
   props: ["el", "mode", "i", "j"],
-  components: {treeList},
+  components: { treeList },
   data: () => ({
-    selectedObj: ''
+    selectedObj: ""
   }),
   methods: {
     fireAddRow() {
@@ -63,12 +63,12 @@ export default {
       this.closeDialog(ref);
     },
     addObject(data) {
-      if(this.selectedObj) {
-        this.$bus.emit('addObjToAction', data);
-        this.selectedObj = '';
-      };
+      if (this.selectedObj) {
+        this.$bus.emit("addObjToAction", data);
+        this.selectedObj = "";
+      }
     },
-    handleUnIndent(event){
+    handleUnIndent(event) {
       this.el.objects.push(event);
     }
   },
