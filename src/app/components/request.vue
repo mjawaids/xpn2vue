@@ -19,6 +19,18 @@
                         <md-list class="md-dense">
                         <md-list-item>
                             <span>Precondition</span>
+                            <md-list-expand>
+                            <md-list>
+                                <md-input-container>
+                                <md-select>
+                                    <md-option v-for="(rule, ruleIndex) in allRules" :key="ruleIndex" :value="rule.label">{{rule.label}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                                <md-button class="md-raised md-primary md-dense" @click="fireAddRule">
+                                    <md-icon>add</md-icon>
+                                </md-button>
+                            </md-list>
+                            </md-list-expand>
                         </md-list-item>
                         <md-list-item>
                             <span>Fields</span>
@@ -39,6 +51,18 @@
                         </md-list-item>
                         <md-list-item>
                             <span>Postcondition</span>
+                            <md-list-expand>
+                            <md-list>
+                                <md-input-container>
+                                <md-select>
+                                    <md-option v-for="(rule, ruleIndex) in allRules" :key="ruleIndex" :value="rule.label">{{rule.label}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                                <md-button class="md-raised md-primary md-dense" @click="fireAddRule">
+                                    <md-icon>add</md-icon>
+                                </md-button>
+                            </md-list>
+                            </md-list-expand>
                         </md-list-item>
                         </md-list>
                     </div>
@@ -117,6 +141,10 @@ export default {
     fieldInd: ""
   }),
   methods: {
+    fireAddRule() {
+      this.$bus.emit("addRuleFromDesign");
+    },
+
     fireAddFormField(indices) {
       this.$bus.emit("addReqFormField", indices);
     },

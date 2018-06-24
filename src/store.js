@@ -46,8 +46,7 @@ export default {
       /** MESSAGE */
       message: {
         type: 'message',
-        value: '?',
-        attribute: [{ title: '', value: '' }]
+        value: '?'
       },
       /** ACTION */
       action: { type: 'action', label: 'New Action', objects: [] },
@@ -56,7 +55,7 @@ export default {
         type: 'request',
         value: '?',
         form: {
-          preCondition: [],
+          preCondition: '',
           fields: [
             {
               label: 'New Field',
@@ -69,7 +68,7 @@ export default {
               W: ''
             }
           ],
-          postCondition: []
+          postCondition: ''
         }
       }
     }
@@ -92,7 +91,7 @@ export default {
     getActionTitle: (state) => (indices) => {
       return state.data[indices.i].filter(action => action.type === 'action')[0];
     },
-    getObjectTitle: (state) => (indices) => {
+    getObject: (state) => (indices) => {
       return state.data.map(item => item.filter(obj => obj.type === 'obj'))
         .filter(item => item[0])[0][indices.j];
     }
@@ -131,7 +130,7 @@ export default {
     addFieldToRequestForm(state, indices) {
       state.data[indices.i][indices.j].form.fields.push({
         label: 'New Field',
-        type: 'Input (Outpus, Search, Lookup)',
+        type: 'Input',
         component: 'text',
         value: '',
         rule: '',
@@ -144,30 +143,38 @@ export default {
       state.data[indices.i][indices.j].form.fields.splice(indices.fieldIndex, 1);
     },
 
-    addAttributeToMessage(state, indices) {
-      state.data[indices.i][indices.j].attribute.push({
-        title: '',
-        value: ''
-      });
-    },
-
-    deleteAttributeFromMessage(state, indices) {
-      state.data[indices.i][indices.j].attribute.splice(indices.attrIndex, 1);
-    },
-
     addAttributeToObj(state, indices) {
-      state.data[indices.i][indices.j].attributes.push({
-        attribute: 'New Attribute',
-        type: '',
-        key: '',
-        enumValues: '',
-        parent: '',
-        rule: ''
-      });
+      if (!indices.i) {
+        state.data.map(item => item.filter(obj => obj.type === 'obj'))
+          .filter(item => item[0])[0][indices.j].attributes.push({
+            attribute: 'New Attribute',
+            type: '',
+            key: '',
+            enumValues: '',
+            parent: '',
+            rule: ''
+          });
+      }
+      else {
+        state.data[indices.i][indices.j].attributes.push({
+          attribute: 'New Attribute',
+          type: '',
+          key: '',
+          enumValues: '',
+          parent: '',
+          rule: ''
+        });
+      }
     },
 
     deleteAttributeFromObj(state, indices) {
-      state.data[indices.i][indices.j].attributes.splice(indices.attrIndex, 1);
+      if (!indices.i) {
+        state.data.map(item => item.filter(obj => obj.type === 'obj'))
+          .filter(item => item[0])[0][indices.j].attributes.splice(indices.attrIndex, 1);
+      }
+      else {
+        state.data[indices.i][indices.j].attributes.splice(indices.attrIndex, 1);
+      }
     },
 
     addObjToAction(state, data) {

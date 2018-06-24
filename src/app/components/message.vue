@@ -16,7 +16,7 @@
             <md-option value="?">?</md-option>
         </md-select>
         <md-dialog v-if="el.value !== '?' && el.value" :ref="`dialog-${i}${j}`">
-            <md-dialog-title class="text-center">{{getObjTitle.value || getObjTitle.label}} Message Details</md-dialog-title>
+            <md-dialog-title class="text-center">{{getObj.value || getObj.label}} Message Details</md-dialog-title>
             <md-dialog-content class="big-modal">
                 <md-table>
                     <md-table-header>
@@ -27,24 +27,24 @@
                     </md-table-header>
 
                     <md-table-body>
-                        <md-table-row v-for="(key, attrIndex) in el.attribute" :key="attrIndex">
+                        <md-table-row v-for="(key, attrIndex) in getObj.attributes" :key="attrIndex">
                             <md-table-cell class="table-attribute">
                                 <md-input-container class="condensed-input">
-                                    <md-input v-model="key.title"></md-input>
+                                    <md-input v-model="key.attribute"></md-input>
                                 </md-input-container>
                             </md-table-cell>
                             <md-table-cell>
                                 <md-input-container class="condensed-input">
-                                    <md-input v-model="key.value"></md-input>
+                                    <md-input></md-input>
                                 </md-input-container>
-                                <md-button class="md-icon-button" @click="fireDeleteAttribute({i, j, attrIndex})">
+                                <md-button class="md-icon-button" @click="fireDeleteAttribute({j, attrIndex})">
                                     <md-icon>delete</md-icon>
                                 </md-button>
                             </md-table-cell>
                         </md-table-row>
                     </md-table-body>
                 </md-table>
-                <md-button class="md-raised md-primary md-dense" @click="fireAddAttribute({i, j})">Add Attribute</md-button>
+                <md-button class="md-raised md-primary md-dense" @click="fireAddAttribute({j})">Add Attribute</md-button>
 
             </md-dialog-content>
 
@@ -63,11 +63,11 @@ export default {
   props: ["el", "mode", "i", "j"],
   methods: {
     fireAddAttribute(indices) {
-      this.$bus.emit("addMessageAttribute", indices);
+      this.$bus.emit("addObjAttr", indices);
     },
 
     fireDeleteAttribute(indices) {
-      this.$bus.emit("deleteMessageAttribute", indices);
+      this.$bus.emit("deleteObjAttr", indices);
     },
     openDialog(ref, value) {
       if (value !== "?" && value) {
@@ -85,8 +85,8 @@ export default {
     }
   },
   computed: {
-    getObjTitle() {
-      return this.$store.getters.getObjectTitle({ i: this.i, j: this.j });
+    getObj() {
+      return this.$store.getters.getObject({ i: this.i, j: this.j });
     }
   }
 };

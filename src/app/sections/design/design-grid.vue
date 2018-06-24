@@ -11,124 +11,137 @@
 </template>
 
 <script>
-import designElement from './design-element.vue';
+import designElement from "./design-element.vue";
 
 export default {
-    name: 'design-grid',
-    components: { designElement },
+  name: "design-grid",
+  components: { designElement },
 
-    computed: {
-        grid() {
-            return this.$store.state.data;
-        }
-    },
-    created() {
-        
-        let addReqFormField = this.addReqFormField;
-        this.$bus.on('addReqFormField', function (indices) {
-            addReqFormField(indices);
-        });
-
-        let deleteReqFormField = this.deleteReqFormField;
-        this.$bus.on('deleteReqFormField', function (indices) {
-            deleteReqFormField(indices);
-        });
-
-        let addMessageAttribute = this.addMessageAttribute;
-        this.$bus.on('addMessageAttribute', function (indices) {
-            addMessageAttribute(indices);
-        });
-
-        let deleteMessageAttribute = this.deleteMessageAttribute;
-        this.$bus.on('deleteMessageAttribute', function (indices) {
-            deleteMessageAttribute(indices);
-        });
-
-        let addObjAttr = this.addObjAttr;
-        this.$bus.on('addObjAttr', function (indices) {
-            addObjAttr(indices);
-        });
-
-        let deleteObjAttr = this.deleteObjAttr;
-        this.$bus.on('deleteObjAttr', function (indices) {
-            deleteObjAttr(indices);
-        });
-
-        let addObjToAction = this.addObjToAction;
-        this.$bus.on('addObjToAction', function (data) {
-            addObjToAction(data);
-        });
-
-        let addObjToResponse = this.addObjToResponse;
-        this.$bus.on('addObjToResponse', function (data) {
-            addObjToResponse(data);
-        });
-
-    },
-    methods: {
-        addReqFormField(indices){
-            this.$store.commit('addFieldToRequestForm', indices);
-        },
-        deleteReqFormField(indices){
-            this.$store.commit('deleteFieldFromRequestForm', indices);
-        },
-        addMessageAttribute(indices){
-            this.$store.commit('addAttributeToMessage', indices);
-        },
-        deleteMessageAttribute(indices){
-            this.$store.commit('deleteAttributeFromMessage', indices);
-        },
-        addObjAttr(indices){
-            this.$store.commit('addAttributeToObj', indices);
-        },
-        deleteObjAttr(indices){
-            this.$store.commit('deleteAttributeFromObj', indices);
-        },
-        addObjToAction(data){
-            this.$store.commit('addObjToAction', data);
-        },
-        addObjToResponse(data){
-            this.$store.commit('addObjToResponse', data);
-        }
-
+  computed: {
+    grid() {
+      return this.$store.state.data;
     }
-}
+  },
+  created() {
+    let addReqFormField = this.addReqFormField;
+    this.$bus.on("addReqFormField", function(indices) {
+      addReqFormField(indices);
+    });
+
+    let deleteReqFormField = this.deleteReqFormField;
+    this.$bus.on("deleteReqFormField", function(indices) {
+      deleteReqFormField(indices);
+    });
+
+    let addObjAttr = this.addObjAttr;
+    this.$bus.on("addObjAttr", function(indices) {
+      addObjAttr(indices);
+    });
+
+    let deleteObjAttr = this.deleteObjAttr;
+    this.$bus.on("deleteObjAttr", function(indices) {
+      deleteObjAttr(indices);
+    });
+
+    let addObjToAction = this.addObjToAction;
+    this.$bus.on("addObjToAction", function(data) {
+      addObjToAction(data);
+    });
+
+    let addObjToResponse = this.addObjToResponse;
+    this.$bus.on("addObjToResponse", function(data) {
+      addObjToResponse(data);
+    });
+
+    let addrule = this.addRule;
+    this.$bus.on("addRuleFromDesign", function() {
+      addrule();
+    });
+  },
+  methods: {
+    addReqFormField(indices) {
+      this.$store.commit("addFieldToRequestForm", indices);
+    },
+    deleteReqFormField(indices) {
+      this.$store.commit("deleteFieldFromRequestForm", indices);
+    },
+    addObjAttr(indices) {
+      this.$store.commit("addAttributeToObj", indices);
+    },
+    deleteObjAttr(indices) {
+      this.$store.commit("deleteAttributeFromObj", indices);
+    },
+    addObjToAction(data) {
+      this.$store.commit('addObjToAction', data);
+    },
+    addObjToResponse(data) {
+      this.$store.commit('addObjToResponse', data);
+    },
+    addRule() {
+      let midRowIndex = this.findMidRow();
+      let midColIndex = this.findMidColofMidRow();
+
+      let newRule = { type: 'rule', label: 'New Rule', rule: '' };
+      this.$store.state.data[midRowIndex][midColIndex].value.push(newRule);
+    },
+    findMidColofMidRow() {
+      let midRowIndex = this.findMidRow();
+
+      for (let i = 0; i < this.$store.state.data[midRowIndex].length; i++) {
+        if (this.$store.state.data[midRowIndex][i].type == 'rules') {
+          return i;
+        }
+      }
+    },
+    findMidRow() {
+      for (let i = 0; i < this.$store.state.data.length; i++) {
+        if (this.$store.state.data[i][0].type == 'obj') {
+          return i;
+        }
+      }
+    }
+  }
+};
 </script>
 
 <style>
 .table {
-    margin: auto;
+  margin: auto;
 }
 
 td {
-    border: 2px solid lightgray;
-    white-space: nowrap;
+  border: 2px solid lightgray;
+  white-space: nowrap;
 }
 
 .horizontal-scroll {
-    overflow: auto; 
-    overflow-y: hidden;
+  overflow: auto;
+  overflow-y: hidden;
 }
 
 .rules {
-  width:230px;
-  height:214px
+  width: 230px;
+  height: 214px;
 }
 
-.service, .action {
+.service,
+.action {
   width: 214px;
   height: 20px;
 }
 
-.obj, .subject {
+.obj,
+.subject {
   width: 20px;
   height: 214px;
   vertical-align: top;
 }
 
-.response, .task, .message, .request {
+.response,
+.task,
+.message,
+.request {
   width: 20px;
   height: 20px;
 }
-
 </style>
